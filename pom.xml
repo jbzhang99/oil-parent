@@ -19,8 +19,8 @@
 		<module>oil-framework</module>
 		<!-- 服务(pom) -->
 		<module>oil-service</module>
-		<!-- 接口api(war) 
-		<module>aikxian-api</module>-->
+		<!-- 接口api(war) -->
+		<module>oil-api</module>
 		<!-- 后台管理(war) -->
 		<module>oil-admin</module>
 	</modules>

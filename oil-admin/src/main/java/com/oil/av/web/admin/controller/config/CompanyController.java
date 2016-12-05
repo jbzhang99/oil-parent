@@ -1,5 +1,6 @@
 package com.oil.av.web.admin.controller.config;
 
+import java.util.Date;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -13,6 +14,7 @@ import com.oil.av.service.platform.config.ConfigCompanyService;
 import com.oil.av.vo.platform.config.ConfigCompanyVo;
 import com.oil.framework.common.page.Pagination;
 import com.oil.framework.common.tuple.BeanTransMap;
+import com.oil.framework.common.util.UUIDS;
 
 @Controller
 @RequestMapping(value = "/platform/config/company")
@@ -38,4 +40,28 @@ public class CompanyController {
 		         pager = configCompanyService.getConfigCompanyVoListByConditions(pager);
 	        return pager;
 	    }
+	 
+	 @RequestMapping(value = "/add", method = RequestMethod.GET)
+	    public String add(Map<String, Object> modelMap) {
+	        return "config/company/company_edit";
+	    }
+	 
+	 @ResponseBody
+	 @RequestMapping(value = "/save", method = RequestMethod.POST)
+	    public Pagination<Map<String, Object>> save(ConfigCompanyVo vo) {
+		 		vo.setModifyTime(new Date());
+		 		vo.setModifyUser("admin");
+				if(vo.getId()==null ){
+					//±£´æ
+					vo.setId(UUIDS.getUUID());
+					vo.setCreateTime(new Date());
+					vo.setCreateUser("admin");
+					configCompanyService.addConfigCompanyVo(vo);
+				}else{
+					//¸üÐÂ
+					configCompanyService.updateConfigCompanyVo(vo);
+				}
+	        return null;
+	    }
+	 
 }

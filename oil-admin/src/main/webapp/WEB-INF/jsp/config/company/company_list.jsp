@@ -71,7 +71,7 @@
 		<div class="box box-info">
 			<div class="box-header">
 				<div class="btn-group">
-					<a class="btn bg-olive" data-toggle="modal" href="${ctx}/platform/config/channel/add" data-target="#modal"> <i class="fa fa-plus"></i> 新增 </a> 
+					<a class="btn bg-olive" data-toggle="modal" href="${ctx}/platform/config/company/add" data-target="#modal"> <i class="fa fa-plus"></i> 新增 </a> 
 					<a class="btn bg-red" id="batchDel"> <i class="fa fa-remove"></i> 批量删除 </a>
 				</div>
 			</div>
