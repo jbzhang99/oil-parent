@@ -22,5 +22,10 @@
 		<typeHandler
 			javaType="com.aikxian.av.em.platform.config.ConfigAccountRankTypeEnum"
 			handler="org.apache.ibatis.type.EnumTypeHandler" />-->
+		<typeHandler javaType="com.oil.av.em.api.UserSexEnum" handler="org.apache.ibatis.type.EnumTypeHandler"/>
+		<typeHandler javaType="com.oil.av.em.api.UserStateEnum" handler="org.apache.ibatis.type.EnumTypeHandler"/>
+		<typeHandler javaType="com.oil.av.em.api.UserPublicMessageEnum" handler="org.apache.ibatis.type.EnumTypeHandler"/>
+		<typeHandler javaType="com.oil.av.em.api.UserThirdPlatformEnum" handler="org.apache.ibatis.type.EnumTypeHandler"/>
+		
 	</typeHandlers>
 </configuration>

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oil.av.service.platform.member.AccountService;
 import com.oil.av.web.api.controller.BaseController;
-import com.oil.av.web.api.model.request.platform.member.UserSignRequest;
+import com.oil.av.web.api.model.request.member.UserSignRequest;
 import com.oil.framework.common.base.model.JsonResult;
 import com.oil.framework.common.exception.BusinessException;
 
@@ -24,8 +24,8 @@ public class SignController extends BaseController{
 	
 	@ResponseBody
 	@RequestMapping(value = "/userSign",method=RequestMethod.GET)
-	public JsonResult userSign(@Valid UserSignRequest userSignRequest,BindingResult br ){
-		JsonResult jsonResult = new JsonResult();
+	public JsonResult<String> userSign(@Valid UserSignRequest userSignRequest,BindingResult br ){
+		JsonResult<String> jsonResult = new JsonResult<String>();
 		if(br.hasErrors()){
 			this.illParamsResult(jsonResult, br);
     		return jsonResult;

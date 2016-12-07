@@ -1,4 +1,4 @@
-package com.oil.av.web.api.model.request.platform.member;
+package com.oil.av.web.api.model.request.member;
 
 
 import org.hibernate.validator.constraints.NotEmpty;

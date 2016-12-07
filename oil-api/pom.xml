@@ -9,7 +9,7 @@
   </parent>
   <packaging>war</packaging>
   <name>oil-api</name>
-  <url>http://www.aikxian.com</url>
+  <url>http://maven.apache.org</url>
   	<dependencies>
 	  		<dependency>
 				<groupId>com.oil</groupId>

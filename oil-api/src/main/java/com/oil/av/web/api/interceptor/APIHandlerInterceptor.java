@@ -1,19 +1,27 @@
 package com.oil.av.web.api.interceptor;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.oil.av.web.api.service.TokenUtilsService;
 
-public class ActionLogHandlerInterceptor implements HandlerInterceptor {
-    private static Log log = LogFactory.getLog(ActionLogHandlerInterceptor.class);
+public class APIHandlerInterceptor implements HandlerInterceptor {
+    private static Log log = LogFactory.getLog(APIHandlerInterceptor.class);
     private Long       startTime;
     private Long       endTime;
 
+    @Resource
+    private TokenUtilsService tokenUtilsService;
+    
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse arg1, Object arg2,
                                 Exception arg3) throws Exception {
@@ -38,10 +46,29 @@ public class ActionLogHandlerInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1,
-                             Object arg2) throws Exception {
-        startTime = System.currentTimeMillis();
-        return true;
+    public boolean preHandle(HttpServletRequest req, HttpServletResponse res, 
+    		Object arg2) throws Exception {
+    	
+    	WebApplicationContext web = WebApplicationContextUtils.getWebApplicationContext(req.getServletContext());
+    	String userId = req.getParameter("userId");
+ 	   	String token = req.getParameter("token");
+ 	   	String version = req.getParameter("version");
+ 	   	String actionUrl = getIpAddr(req);
+ 	    
+ 	   	
+ 	   	if(StringUtils.isNotEmpty(userId)){
+ 		   //验证用户token
+ 	   		if(tokenUtilsService.checkToken(web,userId, token, version, actionUrl)){
+ 	   			return true;
+ 	   		}else{
+ 	   			//token校验不通过
+ 	   			res.setStatus(401);
+ 	   			return false;
+ 	   		}
+ 	   	}else{
+           res.setStatus(400);
+           return false;
+ 	   	}
     }
 
     /**
@@ -67,7 +94,7 @@ public class ActionLogHandlerInterceptor implements HandlerInterceptor {
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("HTTP_X_FORWARDED_FOR");
         }
-        // 如果是多级代理，那么取第�?��ip为客户ip
+        // 如果是多级代理
         if (ip != null && ip.indexOf(",") != -1) {
             ip = ip.substring(ip.lastIndexOf(",") + 1, ip.length()).trim();
         }

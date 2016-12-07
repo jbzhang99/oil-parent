@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oil.av.dao.api.user.UserThirdDao">
+	<resultMap id="UserThirdResult" type="com.oil.av.entity.api.user.UserThirdEntity">
+			<result property="id" column="id" />	
+			<result property="userThirdPlatformEnum" column="platform" />
+			<result property="serial" column="serial" />	
+			<result property="username" column="username" />	
+			<result property="isRelation" column="is_relation" />	
+			<result property="platformUsername" column="platform_username" />	
+			<result property="platformAvatar" column="platform_avatar" />	
+			<result property="createUser" column="create_user" />	
+			<result property="createTime" column="create_time" />	
+			<result property="modifyUser" column="modify_user" />	
+			<result property="modifyTime" column="modify_time" />	
+			<result property="userId" column="user_id" />	
+	</resultMap>
+	<sql id="selectAllColumns">
+		<![CDATA[	
+		select
+		id,platform,serial,username,is_relation,platform_username,platform_avatar,create_user,create_time,modify_user,modify_time,user_id
+		from t_user_third	  
+		]]>
+	</sql>
+	
+	<sql id="whereAllColumns">
+			where 1=1
+		<if test="params.id !=null and params.id !=''">
+			and id = #{params.id}  
+		</if>		
+		<if test="params.userThirdPlatformEnum !=null">
+			and platform = #{params.userThirdPlatformEnum}
+		</if>		
+		<if test="params.serial !=null and params.serial !=''">
+			and serial = #{params.serial}  
+		</if>		
+		<if test="params.username !=null and params.username !=''">
+			and username = #{params.username}  
+		</if>		
+		<if test="params.isRelation !=null">
+			and is_relation = #{params.isRelation}  
+		</if>				
+		<if test="params.platformUsername !=null and params.platformUsername !=''">
+			and platform_username = #{params.platformUsername}  
+		</if>		
+		<if test="params.platformAvatar !=null and params.platformAvatar !=''">
+			and platform_avatar = #{params.platformAvatar}  
+		</if>		
+		<if test="params.createUser !=null and params.createUser !=''">
+			and create_user = #{params.createUser}  
+		</if>		
+		<if test="params.createTime !=null">
+			and create_time = #{params.createTime}  
+		</if>				
+		<if test="params.modifyUser !=null and params.modifyUser !=''">
+			and modify_user = #{params.modifyUser}  
+		</if>		
+		<if test="params.modifyTime !=null">
+			and modify_time = #{params.modifyTime}  
+		</if>				
+		<if test="params.userId !=null">
+			and user_id = #{params.userId}  
+		</if>				
+	</sql>
+	
+	
+	
+	
+	<select id="get" parameterType="Long" resultMap="UserThirdResult">
+	    <include refid="selectAllColumns" />
+		 where id = #{id}
+	</select>
+
+	<select id="getAll" resultMap="UserThirdResult">
+		<include refid="selectAllColumns" />
+	</select>
+	
+	<select id="getUserThirdEntityListByConditions"  resultMap="UserThirdResult">
+		<include refid="selectAllColumns" />
+		<include refid="whereAllColumns" />
+		<![CDATA[	limit #{pager.startIndex},#{pager.pageSize}]]> 
+	</select>	
+	<select id="getUserThirdEntityCountsByConditions"  resultType="Long">
+		<![CDATA[	select count(*) from t_user_third ]]> 
+		<include refid="whereAllColumns" />
+	</select>			
+	<update id="update" parameterType="com.oil.av.entity.api.user.UserThirdEntity">
+		<![CDATA[
+		update t_user_third set  
+		id= #{id},platform= #{userThirdPlatformEnum},serial= #{serial},username= #{username},is_relation= #{isRelation},platform_username= #{platformUsername},platform_avatar= #{platformAvatar},modify_user= #{modifyUser},modify_time= now(),user_id= #{userId}
+		where id = #{id}
+		]]>
+	</update>
+	
+	
+	<insert id="insert" parameterType="com.oil.av.entity.api.user.UserThirdEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+	<![CDATA[
+		insert into t_user_third(platform,serial,username,is_relation,platform_username,platform_avatar,create_user,create_time,modify_user,modify_time,user_id)
+		values(#{userThirdPlatformEnum},#{serial},#{username},#{isRelation},#{platformUsername},#{platformAvatar},#{createUser},now(),#{modifyUser},now(),#{userId})
+	]]>
+	</insert>
+	
+	 <!-- 根据主键删除一条记录 -->  
+    <delete id="delete" parameterType="Long">  
+    <![CDATA[
+        delete from t_user_third where id = #{id}
+    ]]>
+    </delete> 
+</mapper>
