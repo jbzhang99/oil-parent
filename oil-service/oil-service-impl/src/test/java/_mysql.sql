@@ -1,8 +1,8 @@
 /*Table structure for table `cms_article` */
 
-DROP TABLE IF EXISTS `t_cms_article`;
+DROP TABLE IF EXISTS `po_cms_article`;
 
-CREATE TABLE `t_cms_article` (
+CREATE TABLE `po_cms_article` (
   `id` varchar(64) NOT NULL COMMENT '编号',
   `category_id` varchar(64) NOT NULL COMMENT '栏目编号',
   `title` varchar(255) NOT NULL COMMENT '标题',
@@ -25,8 +25,8 @@ CREATE TABLE `t_cms_article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章表';
 
 
-DROP TABLE IF EXISTS `t_cms_category`;
-CREATE TABLE `t_cms_category` (
+DROP TABLE IF EXISTS `po_cms_category`;
+CREATE TABLE `po_cms_category` (
   `id` varchar(64) NOT NULL COMMENT '编号',
   `parent_id` varchar(64) NOT NULL COMMENT '父级编号',
   `office_id` varchar(64) DEFAULT NULL COMMENT '归属机构',
@@ -52,8 +52,8 @@ CREATE TABLE `t_cms_category` (
 
 /*Table structure for table `cms_guestbook` */
 
-DROP TABLE IF EXISTS `t_cms_guestbook`;
-CREATE TABLE `t_cms_guestbook` (
+DROP TABLE IF EXISTS `po_cms_guestbook`;
+CREATE TABLE `po_cms_guestbook` (
   `id` varchar(64) NOT NULL COMMENT '编号',
   `content` varchar(255) NOT NULL COMMENT '留言内容',
   `image1` varchar(255) DEFAULT NULL COMMENT '上传图片1',
@@ -74,8 +74,8 @@ CREATE TABLE `t_cms_guestbook` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='留言板';
 
 
-DROP TABLE IF EXISTS `t_business_notice`;
-CREATE TABLE `t_business_notice` (
+DROP TABLE IF EXISTS `po_business_notice`;
+CREATE TABLE `po_business_notice` (
   `id` varchar(64) NOT NULL COMMENT '编号',
   `category_id` varchar(64) NOT NULL COMMENT '栏目编号',
   `content` varchar(255) DEFAULT NULL COMMENT '内容',
@@ -92,8 +92,8 @@ CREATE TABLE `t_business_notice` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='资讯/公告';
 
 
-DROP TABLE IF EXISTS `t_product_category`;
-CREATE TABLE `t_product_category` (
+DROP TABLE IF EXISTS `po_product_category`;
+CREATE TABLE `po_product_category` (
   `id` varchar(64) NOT NULL COMMENT '编号',
   `parent_id` varchar(64) NOT NULL COMMENT '父级编号',
   `name` varchar(64) NOT NULL COMMENT '分类名称',
@@ -108,8 +108,8 @@ CREATE TABLE `t_product_category` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品分类';
 
-DROP TABLE IF EXISTS `t_product`;
-CREATE TABLE `t_product` (
+DROP TABLE IF EXISTS `po_product`;
+CREATE TABLE `po_product` (
   `id` varchar(64) NOT NULL COMMENT '编号',
   `name` varchar(64) NOT NULL COMMENT '商品名称',
   `category_id` varchar(64) NOT NULL COMMENT '分类id',
@@ -137,8 +137,8 @@ CREATE TABLE `t_product` (
   KEY `product_category_id` (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品';
 
-DROP TABLE IF EXISTS `t_product_parameter`;
-CREATE TABLE `t_product_parameter` (
+DROP TABLE IF EXISTS `po_product_parameter`;
+CREATE TABLE `po_product_parameter` (
   `id` varchar(64) NOT NULL COMMENT '编号',
   `name` varchar(64) NOT NULL COMMENT '参数名称',
   `param_type` varchar(255) DEFAULT NULL COMMENT '参数类型',
@@ -152,8 +152,8 @@ CREATE TABLE `t_product_parameter` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品参数';
 
 
-DROP TABLE IF EXISTS `t_product_parameter_value`;
-CREATE TABLE `t_product_parameter_value` (
+DROP TABLE IF EXISTS `po_product_parameter_value`;
+CREATE TABLE `po_product_parameter_value` (
   `id` varchar(64) NOT NULL COMMENT '商品编号',
   `parameter_id` varchar(64) NOT NULL COMMENT '参数id',
   `parameter_value` varchar(255) DEFAULT NULL COMMENT '参数类型',
@@ -161,8 +161,8 @@ CREATE TABLE `t_product_parameter_value` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品参数值';
 
 
-DROP TABLE IF EXISTS `t_order`;
-CREATE TABLE `t_order` (
+DROP TABLE IF EXISTS `po_order`;
+CREATE TABLE `po_order` (
   `id` varchar(64) NOT NULL COMMENT '订单id',
   `order_sn` varchar(64) NOT NULL COMMENT '订单编号',
   `order_type` char(1) DEFAULT '0' COMMENT '订单类型:0采购、1销售',
@@ -183,8 +183,8 @@ CREATE TABLE `t_order` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单';
 
-DROP TABLE IF EXISTS `t_user_business`;
-CREATE TABLE `t_user_business` (
+DROP TABLE IF EXISTS `pm_member_business`;
+CREATE TABLE `pm_member_business` (
   `id` varchar(64) NOT NULL COMMENT '编码',
   `user_id` varchar(64) NOT NULL COMMENT '用户id',
   `business_name` varchar(255) NOT NULL COMMENT '企业名称',
@@ -200,8 +200,8 @@ CREATE TABLE `t_user_business` (
   KEY `t_user_business_user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户公司信息';
 
-DROP TABLE IF EXISTS `t_user`;
-CREATE TABLE `t_user` (
+DROP TABLE IF EXISTS `pm_member`;
+CREATE TABLE `pm_member` (
   `id` varchar(32) NOT NULL COMMENT '主键，表唯一ID',
   `code` varchar(50) DEFAULT NULL COMMENT '编码',
   `password` varchar(100) NOT NULL COMMENT '密码',
@@ -230,8 +230,8 @@ CREATE TABLE `t_user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=383411367 DEFAULT CHARSET=utf8 COMMENT='用户';
 
-DROP TABLE IF EXISTS `t_user_third`;
-CREATE TABLE `t_user_third` (
+DROP TABLE IF EXISTS `pm_member_third`;
+CREATE TABLE `pm_member_third` (
   `id` varchar(32) NOT NULL COMMENT '主键，表唯一ID',
   `platform` varchar(20) DEFAULT NULL COMMENT '平台类型:enum:weixin,微信;qq,qq;xinlang,新浪;',
   `serial` varchar(200) DEFAULT NULL COMMENT '唯一编码',
@@ -247,8 +247,8 @@ CREATE TABLE `t_user_third` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户-三方账户关联';
 
-DROP TABLE IF EXISTS `t_wx_user`;
-CREATE TABLE `t_wx_user` (
+DROP TABLE IF EXISTS `pm_member_wx`;
+CREATE TABLE `pm_member_wx` (
   `id` varchar(32) NOT NULL COMMENT '主键，表唯一ID',
   `openid` varchar(100) NOT NULL COMMENT '微信标识',
   `user_id` bigint(20) DEFAULT NULL COMMENT '用户id',
@@ -258,8 +258,8 @@ CREATE TABLE `t_wx_user` (
   KEY `is_subscription` (`is_subscription`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='用户绑定微信';
 
-DROP TABLE IF EXISTS `t_sms_queue`;
-CREATE TABLE `t_sms_queue` (
+DROP TABLE IF EXISTS `po_sms_queue`;
+CREATE TABLE `po_sms_queue` (
   `id` varchar(32) NOT NULL COMMENT '主键',
   `template_id` varchar(20) DEFAULT NULL COMMENT '短信模版ID',
   `type` varchar(20) DEFAULT NULL COMMENT '用户类型:enum:member,会员;system,系统;',

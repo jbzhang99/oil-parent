@@ -1,43 +1,39 @@
 package com.oil.av.web.api.service;
 
-import java.util.Date;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
-import javax.annotation.Resource;
-
-import org.apache.commons.io.Charsets;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.WebApplicationContext;
 
-import com.google.common.hash.Hashing;
-import com.oil.av.service.api.user.UserService;
-import com.oil.av.vo.api.user.UserVo;
-import com.oil.framework.common.util.DateUtils;
 import com.oil.framework.common.util.StringUtils;
+import com.oil.framework.common.util.WxSignUtil;
 
 @Service
 public class TokenUtilsService {
     private static final Log logger = LogFactory.getLog(TokenUtilsService.class);
     
-    @Resource
-    private UserService userService;                                     //账号服务
-    
+    private static final String TOKEN_KEY = "token_key";
     //@Resource
     //private RedisTemplate    apiRedisTemplate;
     
     //@Resource
     //private ErrorMsgService errorMsgServiceImpl;        //日志记录
 
-    public static String getToken(String password, String userId, String date) {
-        return Hashing.md5().newHasher()
-        		.putString(StringUtils.getNotEmptyStr(password), Charsets.UTF_8)
-        		.putString(StringUtils.getNotEmptyStr(userId), Charsets.UTF_8)
-        		.putString(date, Charsets.UTF_8).hash().toString();
+    public static String createToken(String userId,String version,String ip,
+    		String deviceCode,String device){
+    	SortedMap<Object,Object> map = new TreeMap<Object, Object>();
+    	map.put("id", userId);
+    	map.put("version", version);
+    	map.put("ip", ip);
+    	map.put("deviceCode", deviceCode);
+    	map.put("device", device);
+    	
+    	return getToken(map);
     }
-
-    public static String getToken(String password, Long userId, Date date) {
-        return getToken(password, StringUtils.getNotEmptyStr(userId), DateUtils.formatDateTime(date, "yyyyMMddHHmmss"));
+    public static String getToken(SortedMap<Object,Object> map) {
+    	return WxSignUtil.createSign(map, TOKEN_KEY);
     }
 
     /**
@@ -48,24 +44,11 @@ public class TokenUtilsService {
      * @param url
      * @return
      */
-    public Boolean checkToken(WebApplicationContext wac,String userId, String token,String version,String url) {
-        String userToken = "";
-        //缓存获取token(String) apiRedisTemplate.opsForValue().get(KeysUtils.Token.getUserTokenKey(userId.toString()));
-        if (StringUtils.isEmpty(userToken)) {
-            logger.info("缓存的用户token过期，用户ID为：" + userId);
-            //查询数据库数据
-            UserVo userVo = userService.getUserVoById(userId);
-            if(userVo != null){
-                userToken = userVo.getLastToken();                
-            }else{
-                userToken="";
-            }
-        }
-        
+    public boolean checkToken(String userToken, String token, String serial, String userId) {
+        //缓存获取 TODO token(String) apiRedisTemplate.opsForValue().get(KeysUtils.Token.getUserTokenKey(userId.toString()));
         if (StringUtils.isNotEmpty(token) && token.equals(userToken)) {
             return true;
         } else {
-            //insertErrorlog(wac,userId, userToken, version, url);
             return false;
         }
     }

@@ -5,15 +5,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-/**序列化工具
- * @Version: 1.0
- * @ProjectName:aikxian-framework-common
- * @Filename:  SerializeUtil.java
- * @PackageName: com.aikxian.framework.common.uitl
- * @Author: songchunlong 宋春龙
- * @Email: songchunlong@aikxian.com
- * @Date:2016年5月30日下午1:47:15
- * @Copyright (c) 2016, dev@aikxian.com.com All Rights Reserved.
+/**
+ * 序列化工具
  */
 public class SerializeUtil {
 				public static byte[] serialize(Object object) {
@@ -44,3 +37,4 @@ public class SerializeUtil {
 								return null;
 				}
 }
+

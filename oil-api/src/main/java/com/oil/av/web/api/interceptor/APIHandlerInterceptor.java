@@ -48,17 +48,21 @@ public class APIHandlerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse res, 
     		Object arg2) throws Exception {
+    	String reqIp = getIpAddr(req);
+    	req.setAttribute("ip", reqIp);
     	
-    	WebApplicationContext web = WebApplicationContextUtils.getWebApplicationContext(req.getServletContext());
     	String userId = req.getParameter("userId");
  	   	String token = req.getParameter("token");
  	   	String version = req.getParameter("version");
- 	   	String actionUrl = getIpAddr(req);
- 	    
+ 	   	String deviceCode = req.getParameter("deviceCode");
+ 	   	String device = req.getParameter("device");
+ 	   	String serial = req.getParameter("serial");
  	   	
+ 	    req.getParameterMap().put("ip", new String[]{reqIp});
  	   	if(StringUtils.isNotEmpty(userId)){
  		   //验证用户token
- 	   		if(tokenUtilsService.checkToken(web,userId, token, version, actionUrl)){
+ 	   		String userToken = TokenUtilsService.createToken(userId, version, reqIp, deviceCode, device);
+ 	   		if(tokenUtilsService.checkToken(token, userToken, serial, userId)){
  	   			return true;
  	   		}else{
  	   			//token校验不通过

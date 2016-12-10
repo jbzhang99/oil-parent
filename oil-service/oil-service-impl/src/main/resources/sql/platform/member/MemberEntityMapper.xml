@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oil.av.dao.platform.member.MemberDao">
+	<resultMap id="MemberResult" type="com.oil.av.entity.platform.member.MemberEntity">
+			<result property="id" column="id" />	
+			<result property="code" column="code" />	
+			<result property="password" column="password" />	
+			<result property="nick" column="nick" />	
+			<result property="memberSexEnum" column="sex" />
+			<result property="avatar" column="avatar" />	
+			<result property="signature" column="signature" />	
+			<result property="profile" column="profile" />	
+			<result property="address" column="address" />	
+			<result property="birthday" column="birthday" />	
+			<result property="phone" column="phone" />	
+			<result property="memberStateEnum" column="state" />
+			<result property="isMember" column="is_member" />	
+			<result property="lastLoginTime" column="last_login_time" />	
+			<result property="lastIp" column="last_ip" />	
+			<result property="lastDevice" column="last_device" />	
+			<result property="lastDeviceSerial" column="last_device_serial" />	
+			<result property="lastSerialNumber" column="last_serial_number" />	
+			<result property="createUser" column="create_user" />	
+			<result property="createTime" column="create_time" />	
+			<result property="modifyUser" column="modify_user" />	
+			<result property="modifyTime" column="modify_time" />	
+			<result property="wrongTimes" column="wrong_times" />	
+			<result property="wrongDate" column="wrong_date" />	
+			<result property="memberPublicMessageEnum" column="public_message" />
+	</resultMap>
+	<sql id="selectAllColumns">
+		<![CDATA[	
+		select
+		id,code,password,nick,sex,avatar,signature,profile,address,birthday,phone,state,is_member,last_login_time,last_ip,last_device,last_device_serial,last_serial_number,create_user,create_time,modify_user,modify_time,wrong_times,wrong_date,public_message
+		from pm_member	  
+		]]>
+	</sql>
+	
+	<sql id="whereAllColumns">
+			where 1=1
+		<if test="params.id !=null and params.id !=''">
+			and id = #{params.id}  
+		</if>		
+		<if test="params.code !=null and params.code !=''">
+			and code = #{params.code}  
+		</if>		
+		<if test="params.password !=null and params.password !=''">
+			and password = #{params.password}  
+		</if>		
+		<if test="params.nick !=null and params.nick !=''">
+			and nick = #{params.nick}  
+		</if>		
+		<if test="params.memberSexEnum !=null">
+			and sex = #{params.memberSexEnum}
+		</if>		
+		<if test="params.avatar !=null and params.avatar !=''">
+			and avatar = #{params.avatar}  
+		</if>		
+		<if test="params.signature !=null and params.signature !=''">
+			and signature = #{params.signature}  
+		</if>		
+		<if test="params.profile !=null and params.profile !=''">
+			and profile = #{params.profile}  
+		</if>		
+		<if test="params.address !=null and params.address !=''">
+			and address = #{params.address}  
+		</if>		
+		<if test="params.birthday !=null">
+			and birthday = #{params.birthday}  
+		</if>				
+		<if test="params.phone !=null and params.phone !=''">
+			and phone = #{params.phone}  
+		</if>		
+		<if test="params.memberStateEnum !=null">
+			and state = #{params.memberStateEnum}
+		</if>		
+		<if test="params.isMember !=null">
+			and is_member = #{params.isMember}  
+		</if>				
+		<if test="params.lastLoginTime !=null">
+			and last_login_time = #{params.lastLoginTime}  
+		</if>				
+		<if test="params.lastIp !=null and params.lastIp !=''">
+			and last_ip = #{params.lastIp}  
+		</if>		
+		<if test="params.lastDevice !=null and params.lastDevice !=''">
+			and last_device = #{params.lastDevice}  
+		</if>		
+		<if test="params.lastDeviceSerial !=null and params.lastDeviceSerial !=''">
+			and last_device_serial = #{params.lastDeviceSerial}  
+		</if>		
+		<if test="params.lastSerialNumber !=null and params.lastSerialNumber !=''">
+			and last_serial_number = #{params.lastSerialNumber}  
+		</if>		
+		<if test="params.createUser !=null and params.createUser !=''">
+			and create_user = #{params.createUser}  
+		</if>		
+		<if test="params.createTime !=null">
+			and create_time = #{params.createTime}  
+		</if>				
+		<if test="params.modifyUser !=null and params.modifyUser !=''">
+			and modify_user = #{params.modifyUser}  
+		</if>		
+		<if test="params.modifyTime !=null">
+			and modify_time = #{params.modifyTime}  
+		</if>				
+		<if test="params.wrongTimes !=null">
+			and wrong_times = #{params.wrongTimes}
+		</if>					
+		<if test="params.wrongDate !=null">
+			and wrong_date = #{params.wrongDate}  
+		</if>				
+		<if test="params.memberPublicMessageEnum !=null">
+			and public_message = #{params.memberPublicMessageEnum}
+		</if>		
+	</sql>
+	
+<!-- start -->
+	<!-- 根据用户手机号会员信息 -->
+	<select id="getByPhone" resultMap="UserResult">
+		<include refid="selectAllColumns" />
+		where phone= #{phone}
+	</select>
+	<!-- 更加userId查找序列号 -->
+	<select id="getSerialById" resultType="String">
+		<![CDATA[	select last_serial_number from t_user ]]>
+		where id=#{userId}
+	</select>
+	
+	<update id="updateUser" parameterType="map" >
+        update t_user
+        <set>
+            <if test="nick!=null or nick!=''">
+                nick = #{nick}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+<!-- end -->
+	
+	<select id="get" parameterType="Long" resultMap="MemberResult">
+	    <include refid="selectAllColumns" />
+		 where id = #{id}
+	</select>
+
+	<select id="getAll" resultMap="MemberResult">
+		<include refid="selectAllColumns" />
+	</select>
+	
+	<select id="getMemberEntityListByConditions"  resultMap="MemberResult">
+		<include refid="selectAllColumns" />
+		<include refid="whereAllColumns" />
+		<![CDATA[	limit #{pager.startIndex},#{pager.pageSize}]]> 
+	</select>	
+	<select id="getMemberEntityCountsByConditions"  resultType="Long">
+		<![CDATA[	select count(*) from pm_member ]]> 
+		<include refid="whereAllColumns" />
+	</select>			
+	<update id="update" parameterType="com.oil.av.entity.platform.member.MemberEntity">
+		<![CDATA[
+		update pm_member set  
+		id= #{id},code= #{code},password= #{password},nick= #{nick},sex= #{memberSexEnum},avatar= #{avatar},signature= #{signature},profile= #{profile},address= #{address},birthday= #{birthday},phone= #{phone},state= #{memberStateEnum},is_member= #{isMember},last_login_time= #{lastLoginTime},last_ip= #{lastIp},last_device= #{lastDevice},last_device_serial= #{lastDeviceSerial},last_serial_number= #{lastSerialNumber},modify_user= #{modifyUser},modify_time= now(),wrong_times= #{wrongTimes},wrong_date= #{wrongDate},public_message= #{memberPublicMessageEnum}
+		where id = #{id}
+		]]>
+	</update>
+	
+	
+	<!-- 自动生成主键 <insert id="insert" parameterType="com.oil.av.entity.platform.member.MemberEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id">-->
+	<insert id="insert" parameterType="com.oil.av.entity.platform.member.MemberEntity" >
+	<![CDATA[
+		insert into pm_member(code,password,nick,sex,avatar,signature,profile,address,birthday,phone,state,is_member,last_login_time,last_ip,last_device,last_device_serial,last_serial_number,create_user,create_time,modify_user,modify_time,wrong_times,wrong_date,public_message)
+		values(#{code},#{password},#{nick},#{memberSexEnum},#{avatar},#{signature},#{profile},#{address},#{birthday},#{phone},#{memberStateEnum},#{isMember},#{lastLoginTime},#{lastIp},#{lastDevice},#{lastDeviceSerial},#{lastSerialNumber},#{createUser},now(),#{modifyUser},now(),#{wrongTimes},#{wrongDate},#{memberPublicMessageEnum})
+	]]>
+	</insert>
+	
+	 <!-- 根据主键删除一条记录 -->  
+    <delete id="delete" parameterType="Long">  
+    <![CDATA[
+        delete from pm_member where id = #{id}
+    ]]>
+    </delete> 
+</mapper>

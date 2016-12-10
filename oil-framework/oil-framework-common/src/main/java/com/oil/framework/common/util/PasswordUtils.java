@@ -6,22 +6,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 
-/** 密码工具类
- * @Version: 1.0
- * @ProjectName:aikxian-framework-common
- * @Filename:  PasswordUtils.java
- * @PackageName: com.aikxian.framework.common.uitl
- * @Author: songchunlong 宋春龙
- * @Email: songchunlong@aikxian.com
- * @Date:2016年4月18日上午11:36:34
- * @Copyright (c) 2016, dev@aikxian.com.com All Rights Reserved.
- */
 public class PasswordUtils {
 
     /**
      * SaltPart
      */
-    private static final String SALT_PART = "af#42SLJ%DBKPa";
+    private static final String SALT_PART = "cde@42SLJ!DB06Pa";
 
     /**
      * Default encoding

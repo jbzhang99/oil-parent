@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oil.av.dao.platform.member.MemberBusinessDao">
+	<resultMap id="MemberBusinessResult" type="com.oil.av.entity.platform.member.MemberBusinessEntity">
+			<result property="id" column="id" />	
+			<result property="userId" column="user_id" />	
+			<result property="businessName" column="business_name" />	
+			<result property="phone" column="phone" />	
+			<result property="bank" column="bank" />	
+			<result property="bankNumber" column="bank_number" />	
+			<result property="invoice" column="invoice" />	
+			<result property="createBy" column="create_by" />	
+			<result property="createDate" column="create_date" />	
+			<result property="updateBy" column="update_by" />	
+			<result property="updateDate" column="update_date" />	
+	</resultMap>
+	<sql id="selectAllColumns">
+		<![CDATA[	
+		select
+		id,user_id,business_name,phone,bank,bank_number,invoice,create_by,create_date,update_by,update_date
+		from pm_member_business	  
+		]]>
+	</sql>
+	
+	<sql id="whereAllColumns">
+			where 1=1
+		<if test="params.id !=null and params.id !=''">
+			and id = #{params.id}  
+		</if>		
+		<if test="params.userId !=null and params.userId !=''">
+			and user_id = #{params.userId}  
+		</if>		
+		<if test="params.businessName !=null and params.businessName !=''">
+			and business_name = #{params.businessName}  
+		</if>		
+		<if test="params.phone !=null and params.phone !=''">
+			and phone = #{params.phone}  
+		</if>		
+		<if test="params.bank !=null and params.bank !=''">
+			and bank = #{params.bank}  
+		</if>		
+		<if test="params.bankNumber !=null and params.bankNumber !=''">
+			and bank_number = #{params.bankNumber}  
+		</if>		
+		<if test="params.invoice !=null and params.invoice !=''">
+			and invoice = #{params.invoice}  
+		</if>		
+		<if test="params.createBy !=null and params.createBy !=''">
+			and create_by = #{params.createBy}  
+		</if>		
+		<if test="params.createDate !=null">
+			and create_date = #{params.createDate}  
+		</if>				
+		<if test="params.updateBy !=null and params.updateBy !=''">
+			and update_by = #{params.updateBy}  
+		</if>		
+		<if test="params.updateDate !=null">
+			and update_date = #{params.updateDate}  
+		</if>				
+	</sql>
+	
+	
+	
+	
+	<select id="get" parameterType="Long" resultMap="MemberBusinessResult">
+	    <include refid="selectAllColumns" />
+		 where id = #{id}
+	</select>
+
+	<select id="getAll" resultMap="MemberBusinessResult">
+		<include refid="selectAllColumns" />
+	</select>
+	
+	<select id="getMemberBusinessEntityListByConditions"  resultMap="MemberBusinessResult">
+		<include refid="selectAllColumns" />
+		<include refid="whereAllColumns" />
+		<![CDATA[	limit #{pager.startIndex},#{pager.pageSize}]]> 
+	</select>	
+	<select id="getMemberBusinessEntityCountsByConditions"  resultType="Long">
+		<![CDATA[	select count(*) from pm_member_business ]]> 
+		<include refid="whereAllColumns" />
+	</select>			
+	<update id="update" parameterType="com.oil.av.entity.platform.member.MemberBusinessEntity">
+		<![CDATA[
+		update pm_member_business set  
+		id= #{id},user_id= #{userId},business_name= #{businessName},phone= #{phone},bank= #{bank},bank_number= #{bankNumber},invoice= #{invoice},create_by= #{createBy},create_date= #{createDate},update_by= #{updateBy},update_date= #{updateDate}
+		where id = #{id}
+		]]>
+	</update>
+	
+	
+	<!-- 自动生成主键 <insert id="insert" parameterType="com.oil.av.entity.platform.member.MemberBusinessEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id">-->
+	<insert id="insert" parameterType="com.oil.av.entity.platform.member.MemberBusinessEntity" >
+	<![CDATA[
+		insert into pm_member_business(user_id,business_name,phone,bank,bank_number,invoice,create_by,create_date,update_by,update_date)
+		values(#{userId},#{businessName},#{phone},#{bank},#{bankNumber},#{invoice},#{createBy},#{createDate},#{updateBy},#{updateDate})
+	]]>
+	</insert>
+	
+	 <!-- 根据主键删除一条记录 -->  
+    <delete id="delete" parameterType="Long">  
+    <![CDATA[
+        delete from pm_member_business where id = #{id}
+    ]]>
+    </delete> 
+</mapper>

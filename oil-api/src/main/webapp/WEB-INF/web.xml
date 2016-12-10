@@ -63,17 +63,5 @@
         <listener-class>com.oil.av.web.api.listener.SystemInit</listener-class>
     </listener>
 
-	<error-page>
-		<error-code>400</error-code>
-		<location>/client/error.html?code=400</location>
-	</error-page>
-	<error-page>
-		<error-code>404</error-code>
-		<location>/client/error404.html?code=404</location>
-	</error-page>
-	<error-page>
-		<error-code>500</error-code>
-		<location>/client/error.html?code=500</location>
-	</error-page>
 	<welcome-file-list />
 </web-app>
