@@ -22,7 +22,7 @@ CREATE TABLE `po_cms_article` (
   KEY `cms_article_keywords` (`keywords`),
   KEY `cms_article_update_date` (`update_date`),
   KEY `cms_article_category_id` (`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='运营管理-文章表';
 
 
 DROP TABLE IF EXISTS `po_cms_category`;
@@ -48,7 +48,7 @@ CREATE TABLE `po_cms_category` (
   KEY `cms_category_parent_id` (`parent_id`),
   KEY `cms_category_module` (`cat_type`),
   KEY `cms_category_name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='栏目表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='运营管理-栏目表';
 
 /*Table structure for table `cms_guestbook` */
 
@@ -71,7 +71,7 @@ CREATE TABLE `po_cms_guestbook` (
   `re_content` varchar(100) DEFAULT NULL COMMENT '回复内容',
   `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='留言板';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='运营管理-留言板';
 
 
 DROP TABLE IF EXISTS `po_business_notice`;
@@ -85,11 +85,11 @@ CREATE TABLE `po_business_notice` (
   `update_by` varchar(64) DEFAULT NULL COMMENT '更新者',
   `update_date` datetime DEFAULT NULL COMMENT '更新时间',
   `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
-  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '运营管理-删除标记',
   PRIMARY KEY (`id`),
   KEY `cms_article_update_date` (`update_date`),
   KEY `cms_article_category_id` (`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='资讯/公告';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='运营管理-资讯/公告';
 
 
 DROP TABLE IF EXISTS `po_product_category`;
@@ -106,7 +106,7 @@ CREATE TABLE `po_product_category` (
   `description` varchar(255) DEFAULT NULL COMMENT '描述信息',
   `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品分类';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='运营管理-商品分类';
 
 DROP TABLE IF EXISTS `po_product`;
 CREATE TABLE `po_product` (
@@ -135,7 +135,7 @@ CREATE TABLE `po_product` (
   PRIMARY KEY (`id`),
   KEY `product_keywords` (`keywords`),
   KEY `product_category_id` (`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='运营管理-商品';
 
 DROP TABLE IF EXISTS `po_product_parameter`;
 CREATE TABLE `po_product_parameter` (
@@ -149,7 +149,7 @@ CREATE TABLE `po_product_parameter` (
   `update_date` datetime DEFAULT NULL COMMENT '更新时间',
   `description` varchar(255) DEFAULT NULL COMMENT '描述信息',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品参数';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='运营管理-商品参数';
 
 
 DROP TABLE IF EXISTS `po_product_parameter_value`;
@@ -158,7 +158,7 @@ CREATE TABLE `po_product_parameter_value` (
   `parameter_id` varchar(64) NOT NULL COMMENT '参数id',
   `parameter_value` varchar(255) DEFAULT NULL COMMENT '参数类型',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品参数值';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='运营管理-商品参数值';
 
 
 DROP TABLE IF EXISTS `po_order`;
@@ -181,7 +181,7 @@ CREATE TABLE `po_order` (
   `update_date` datetime DEFAULT NULL COMMENT '更新时间',
   `description` varchar(255) DEFAULT NULL COMMENT '处理描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='运营管理-订单';
 
 DROP TABLE IF EXISTS `pm_member_business`;
 CREATE TABLE `pm_member_business` (
@@ -198,7 +198,7 @@ CREATE TABLE `pm_member_business` (
   `update_date` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`),
   KEY `t_user_business_user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户公司信息';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户管理-公司信息';
 
 DROP TABLE IF EXISTS `pm_member`;
 CREATE TABLE `pm_member` (
@@ -228,7 +228,7 @@ CREATE TABLE `pm_member` (
   `wrong_date` datetime DEFAULT NULL COMMENT '密码错误日期',
   `public_message` varchar(20) DEFAULT NULL COMMENT '公告接收状态  enum:open,开启;close,结束;',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=383411367 DEFAULT CHARSET=utf8 COMMENT='用户';
+) ENGINE=InnoDB AUTO_INCREMENT=383411367 DEFAULT CHARSET=utf8 COMMENT='用户管理-用户';
 
 DROP TABLE IF EXISTS `pm_member_third`;
 CREATE TABLE `pm_member_third` (
@@ -245,7 +245,7 @@ CREATE TABLE `pm_member_third` (
   `modify_time` datetime NOT NULL COMMENT '修改时间',
   `user_id` bigint(20) DEFAULT NULL COMMENT '注册用户ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户-三方账户关联';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户管理-三方账户关联';
 
 DROP TABLE IF EXISTS `pm_member_wx`;
 CREATE TABLE `pm_member_wx` (
@@ -256,7 +256,7 @@ CREATE TABLE `pm_member_wx` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `openid` (`openid`) USING BTREE,
   KEY `is_subscription` (`is_subscription`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='用户绑定微信';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='用户管理-绑定微信';
 
 DROP TABLE IF EXISTS `po_sms_queue`;
 CREATE TABLE `po_sms_queue` (
@@ -264,7 +264,7 @@ CREATE TABLE `po_sms_queue` (
   `template_id` varchar(20) DEFAULT NULL COMMENT '短信模版ID',
   `type` varchar(20) DEFAULT NULL COMMENT '用户类型:enum:member,会员;system,系统;',
   `name` varchar(50) DEFAULT NULL COMMENT '用户姓名',
-  `phone_no` varchar(20) NOT NULL COMMENT '手机号码',
+  `phone` varchar(20) NOT NULL COMMENT '手机号码',
   `content` varchar(200) NOT NULL COMMENT '消息内容',
   `send_times` int(11) DEFAULT NULL COMMENT '发送次数',
   `is_success` tinyint(1) DEFAULT NULL COMMENT '是否成功',
@@ -275,5 +275,18 @@ CREATE TABLE `po_sms_queue` (
   `modify_user` varchar(50) DEFAULT NULL COMMENT '修改人',
   `modify_time` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=230 DEFAULT CHARSET=utf8 COMMENT='系统-系统日志-短信队列';
+) ENGINE=InnoDB AUTO_INCREMENT=230 DEFAULT CHARSET=utf8 COMMENT='运营管理-短信队列';
+
+DROP TABLE IF EXISTS `po_sms_template`;
+CREATE TABLE `po_sms_template` (
+  `id` varchar(32) NOT NULL COMMENT '主键',
+  `name` varchar(20) DEFAULT NULL COMMENT '模板名称:enum:register,注册验证码;pwdmodify,密码修改;notice,通知;active,活动;',
+  `content` varchar(200) NOT NULL COMMENT '消息内容',
+  `is_enable` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否启用',
+  `create_user` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `modify_user` varchar(50) DEFAULT NULL COMMENT '修改人',
+  `modify_time` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=230 DEFAULT CHARSET=utf8 COMMENT='运营管理-短信模板';
 
