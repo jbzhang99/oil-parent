@@ -2,6 +2,8 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<!-- 而在 XML 规范中，dtd 是有严格的顺序的properties>settings>typeAliases>typeHandlers>objectFactory>
+	objectWrapperFactory>plugins>environments>databaseIdProvider>mappers -->
 	<settings>
 		<setting name="logImpl" value="LOG4J2" />
 		<!-- 这个配置使全局的映射器启用或禁用缓存 -->
@@ -17,6 +19,12 @@
 		<!-- 设置超时时间，它决定驱动等待一个数据库响应的时间。 -->
 		<setting name="defaultStatementTimeout" value="25000" />
 	</settings>
+	<typeAliases>  
+		 <!-- 针对单个别名定义 type:类型的路径 alias:别名 -->  
+	   	 <typeAlias type="com.oil.av.entity.platform.member.MemberEntity" alias="_MemberEntity"/>  
+	   	 <typeAlias type="com.oil.av.entity.platform.config.SmsQueueEntity" alias="_SmsQueueEntity"/>
+	   	 <typeAlias type="com.oil.av.entity.platform.config.SmsTemplateEntity" alias="_SmsTemplateEntity"/>
+	</typeAliases>
 	<typeHandlers>
 		<!-- 
 		<typeHandler
@@ -25,6 +33,9 @@
 		<typeHandler javaType="com.oil.av.em.MemberSexEnum" handler="org.apache.ibatis.type.EnumTypeHandler"/>
 		<typeHandler javaType="com.oil.av.em.MemberStateEnum" handler="org.apache.ibatis.type.EnumTypeHandler"/>
 		<typeHandler javaType="com.oil.av.em.MemberPublicMessageEnum" handler="org.apache.ibatis.type.EnumTypeHandler"/>
-		
+		<typeHandler javaType="com.oil.av.em.SmsQueueTypeEnum" handler="org.apache.ibatis.type.EnumTypeHandler"/>
+		<typeHandler javaType="com.oil.av.em.SmsTemplateNameEnum" handler="org.apache.ibatis.type.EnumTypeHandler"/>
 	</typeHandlers>
+	
+	
 </configuration>

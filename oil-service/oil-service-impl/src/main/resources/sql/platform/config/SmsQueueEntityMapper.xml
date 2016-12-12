@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+  
+<mapper namespace="com.oil.av.dao.platform.config.SmsQueueDao">
+	<resultMap id="SmsQueueResult" type="_SmsQueueEntity">
+			<result property="id" column="id" />	
+			<result property="templateId" column="template_id" />	
+			<result property="smsQueueTypeEnum" column="type" />
+			<result property="name" column="name" />	
+			<result property="phone" column="phone" />	
+			<result property="content" column="content" />	
+			<result property="sendTimes" column="send_times" />	
+			<result property="isSuccess" column="is_success" />	
+			<result property="successTime" column="success_time" />	
+			<result property="lastSendTime" column="last_send_time" />	
+			<result property="createUser" column="create_user" />	
+			<result property="createTime" column="create_time" />	
+			<result property="modifyUser" column="modify_user" />	
+			<result property="modifyTime" column="modify_time" />	
+	</resultMap>
+	<sql id="selectAllColumns">
+		<![CDATA[	
+		select
+		id,template_id,type,name,phone,content,send_times,is_success,success_time,last_send_time,create_user,create_time,modify_user,modify_time
+		from po_sms_queue	  
+		]]>
+	</sql>
+	
+	<sql id="whereAllColumns">
+			where 1=1
+		<if test="params.id !=null and params.id !=''">
+			and id = #{params.id}  
+		</if>		
+		<if test="params.templateId !=null and params.templateId !=''">
+			and template_id = #{params.templateId}  
+		</if>		
+		<if test="params.smsQueueTypeEnum !=null">
+			and type = #{params.smsQueueTypeEnum}
+		</if>		
+		<if test="params.name !=null and params.name !=''">
+			and name = #{params.name}  
+		</if>		
+		<if test="params.phone !=null and params.phone !=''">
+			and phone = #{params.phone}  
+		</if>		
+		<if test="params.content !=null and params.content !=''">
+			and content = #{params.content}  
+		</if>		
+		<if test="params.sendTimes !=null">
+			and send_times = #{params.sendTimes}
+		</if>					
+		<if test="params.isSuccess !=null">
+			and is_success = #{params.isSuccess}  
+		</if>				
+		<if test="params.successTime !=null">
+			and success_time = #{params.successTime}  
+		</if>				
+		<if test="params.lastSendTime !=null">
+			and last_send_time = #{params.lastSendTime}  
+		</if>				
+		<if test="params.createUser !=null and params.createUser !=''">
+			and create_user = #{params.createUser}  
+		</if>		
+		<if test="params.createTime !=null">
+			and create_time = #{params.createTime}  
+		</if>				
+		<if test="params.modifyUser !=null and params.modifyUser !=''">
+			and modify_user = #{params.modifyUser}  
+		</if>		
+		<if test="params.modifyTime !=null">
+			and modify_time = #{params.modifyTime}  
+		</if>				
+	</sql>
+	
+	<select id="get" parameterType="Long" resultMap="SmsQueueResult">
+	    <include refid="selectAllColumns" />
+		 where id = #{id}
+	</select>
+
+	<select id="getAll" resultMap="SmsQueueResult">
+		<include refid="selectAllColumns" />
+	</select>
+	
+	<select id="getSmsQueueEntityListByConditions"  resultMap="SmsQueueResult">
+		<include refid="selectAllColumns" />
+		<include refid="whereAllColumns" />
+		<![CDATA[	limit #{pager.startIndex},#{pager.pageSize}]]> 
+	</select>	
+<!-- start -->	
+	<select id="getListByConditions"  resultMap="SmsQueueResult">
+		<include refid="selectAllColumns" />
+		<include refid="whereAllColumns" />
+	</select>	
+<!-- end -->
+	<select id="getSmsQueueEntityCountsByConditions"  resultType="Long">
+		<![CDATA[	select count(*) from po_sms_queue ]]> 
+		<include refid="whereAllColumns" />
+	</select>			
+	<update id="update" parameterType="_SmsQueueEntity">
+		<![CDATA[
+		update po_sms_queue set  
+		id= #{id},template_id= #{templateId},type= #{smsQueueTypeEnum},name= #{name},phone= #{phone},content= #{content},send_times= #{sendTimes},is_success= #{isSuccess},success_time= #{successTime},last_send_time= #{lastSendTime},modify_user= #{modifyUser},modify_time= now()
+		where id = #{id}
+		]]>
+	</update>
+	
+	<update id="updateNotNull" parameterType="_smsQueueEntity">
+        update po_sms_queue 
+    	<trim prefix="SET" suffixOverrides=",">
+				
+				<if test="templateId != null">template_id= #{templateId},</if>
+				<if test="smsQueueTypeEnum != null">type= #{smsQueueTypeEnum},</if>
+				<if test="name != null">name= #{name},</if>
+				<if test="phone != null">phone= #{phone},</if>
+				<if test="content != null">content= #{content},</if>
+				<if test="sendTimes != null">send_times= #{sendTimes},</if>
+				<if test="isSuccess != null">is_success= #{isSuccess},</if>
+				<if test="successTime != null">success_time= #{successTime},</if>
+				<if test="lastSendTime != null">last_send_time= #{lastSendTime},</if>
+				<if test="createUser != null">create_user= #{createUser},</if>
+				<if test="createTime != null">create_time= #{createTime},</if>
+				<if test="modifyUser != null">modify_user= #{modifyUser},</if>
+				modify_time= now()
+	    </trim>
+        where id = #{id}
+	</update>
+	
+	<!-- 自动生成主键 <insert id="insert" parameterType="_SmsQueueEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id">-->
+	<insert id="insert" parameterType="_SmsQueueEntity" >
+	<![CDATA[
+		insert into po_sms_queue(template_id,type,name,phone,content,send_times,is_success,success_time,last_send_time,create_user,create_time,modify_user,modify_time)
+		values(#{templateId},#{smsQueueTypeEnum},#{name},#{phone},#{content},#{sendTimes},#{isSuccess},#{successTime},#{lastSendTime},#{createUser},now(),#{modifyUser},now())
+	]]>
+	</insert>
+	
+	 <!-- 根据主键删除一条记录 -->  
+    <delete id="delete" parameterType="Long">  
+    <![CDATA[
+        delete from po_sms_queue where id = #{id}
+    ]]>
+    </delete> 
+</mapper>

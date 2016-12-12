@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oil.av.entity.platform.config.dao.SmsTemplateDao">
+	<resultMap id="SmsTemplateResult" type="_SmsTemplateEntity">
+			<result property="id" column="id" />	
+			<result property="smsTemplateNameEnum" column="name" />
+			<result property="content" column="content" />	
+			<result property="isEnable" column="is_enable" />	
+			<result property="createUser" column="create_user" />	
+			<result property="createTime" column="create_time" />	
+			<result property="modifyUser" column="modify_user" />	
+			<result property="modifyTime" column="modify_time" />	
+	</resultMap>
+	<sql id="selectAllColumns">
+		<![CDATA[	
+		select
+		id,name,content,is_enable,create_user,create_time,modify_user,modify_time
+		from po_sms_template	  
+		]]>
+	</sql>
+	
+	<sql id="whereAllColumns">
+			where 1=1
+		<if test="params.id !=null and params.id !=''">
+			and id = #{params.id}  
+		</if>		
+		<if test="params.smsTemplateNameEnum !=null">
+			and name = #{params.smsTemplateNameEnum}
+		</if>		
+		<if test="params.content !=null and params.content !=''">
+			and content = #{params.content}  
+		</if>		
+		<if test="params.isEnable !=null">
+			and is_enable = #{params.isEnable}  
+		</if>				
+		<if test="params.createUser !=null and params.createUser !=''">
+			and create_user = #{params.createUser}  
+		</if>		
+		<if test="params.createTime !=null">
+			and create_time = #{params.createTime}  
+		</if>				
+		<if test="params.modifyUser !=null and params.modifyUser !=''">
+			and modify_user = #{params.modifyUser}  
+		</if>		
+		<if test="params.modifyTime !=null">
+			and modify_time = #{params.modifyTime}  
+		</if>				
+	</sql>
+	
+<!-- start -->	
+	<select id="getListByConditions"  resultMap="SmTemplateResult">
+		<include refid="selectAllColumns" />
+		<include refid="whereAllColumns" />
+	</select>	
+<!-- end -->
+	
+	
+	<select id="get" parameterType="Long" resultMap="SmsTemplateResult">
+	    <include refid="selectAllColumns" />
+		 where id = #{id}
+	</select>
+
+	<select id="getAll" resultMap="SmsTemplateResult">
+		<include refid="selectAllColumns" />
+	</select>
+	
+	<select id="getSmsTemplateEntityListByConditions"  resultMap="SmsTemplateResult">
+		<include refid="selectAllColumns" />
+		<include refid="whereAllColumns" />
+		<![CDATA[	limit #{pager.startIndex},#{pager.pageSize}]]> 
+	</select>	
+	<select id="getSmsTemplateEntityCountsByConditions"  resultType="Long">
+		<![CDATA[	select count(*) from po_sms_template ]]> 
+		<include refid="whereAllColumns" />
+	</select>			
+	<update id="update" parameterType="_SmsTemplateEntity">
+		<![CDATA[
+		update po_sms_template set  
+		id= #{id},name= #{smsTemplateNameEnum},content= #{content},is_enable= #{isEnable},modify_user= #{modifyUser},modify_time= now()
+		where id = #{id}
+		]]>
+	</update>
+	
+	<update id="updateNotNull" parameterType="_smsTemplateEntity">
+        update po_sms_template 
+    	<trim prefix="SET" suffixOverrides=",">
+				<if test="smsTemplateNameEnum != null">name= #{smsTemplateNameEnum},</if>
+				<if test="content != null">content= #{content},</if>
+				<if test="isEnable != null">is_enable= #{isEnable},</if>
+				<if test="createUser != null">create_user= #{createUser},</if>
+				<if test="createTime != null">create_time= #{createTime},</if>
+				<if test="modifyUser != null">modify_user= #{modifyUser},</if>
+				modify_time= now()
+	    </trim>
+        where id = #{id}
+	</update>
+	
+	<!-- 自动生成主键 <insert id="insert" parameterType="_SmsTemplateEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id">-->
+	<insert id="insert" parameterType="_SmsTemplateEntity" >
+	<![CDATA[
+		insert into po_sms_template(name,content,is_enable,create_user,create_time,modify_user,modify_time)
+		values(#{smsTemplateNameEnum},#{content},#{isEnable},#{createUser},now(),#{modifyUser},now())
+	]]>
+	</insert>
+	
+	 <!-- 根据主键删除一条记录 -->  
+    <delete id="delete" parameterType="Long">  
+    <![CDATA[
+        delete from po_sms_template where id = #{id}
+    ]]>
+    </delete> 
+</mapper>
