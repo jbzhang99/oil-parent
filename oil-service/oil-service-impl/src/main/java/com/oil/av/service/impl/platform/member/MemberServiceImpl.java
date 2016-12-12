@@ -99,5 +99,15 @@ public class MemberServiceImpl implements MemberService {
 	public String getSerialById(String userId) {
 		return memberDao.getSerialById(userId);
 	}
+
+	@Override
+	public Integer updateNotNull(MemberVo memberUpdate) {
+		return memberDao.updateNotNull(this.vo2entity(memberUpdate));
+	}
+
+	@Override
+	public int getMemberCountByPhone(String phone) {
+		return memberDao.getMemberCountByPhone(phone);
+	}
 	
 }

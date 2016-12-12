@@ -49,7 +49,6 @@ public class APIHandlerInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest req, HttpServletResponse res, 
     		Object arg2) throws Exception {
     	String reqIp = getIpAddr(req);
-    	req.setAttribute("ip", reqIp);
     	
     	String userId = req.getParameter("userId");
  	   	String token = req.getParameter("token");

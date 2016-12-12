@@ -68,10 +68,16 @@ public interface MemberDao {
     List<MemberEntity> getByPhone(@Param("phone") String phone);
     
     /**
+     * 更新不为null的字段,如果有字段设置为null,用下面的
+     * @param vo2entity
+     */
+    Integer updateNotNull(MemberEntity vo2entity);
+    
+    /**
      * 动态更新
      * @param map
      */
-    void updateMember(@Param("map") Map<String,Object> map);
+    void updateMemberByMap(@Param("map") Map<String,Object> map);
 
     /**
      * 通过会员id查询序列号
@@ -79,5 +85,13 @@ public interface MemberDao {
      * @return
      */
 	String getSerialById(String userId);
+
+	/**
+	 * 手机号查询用户个数
+	 * @param phone
+	 * @return
+	 */
+	int getMemberCountByPhone(String phone);
+
     
 }

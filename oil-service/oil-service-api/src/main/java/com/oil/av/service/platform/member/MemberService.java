@@ -63,4 +63,17 @@ public interface MemberService {
       * @return
       */
 	public String getSerialById(String userId);
+
+	/**
+	 * 更新不为null的字段
+	 * @param memberUpdate
+	 */
+	public Integer updateNotNull(MemberVo memberUpdate);
+
+	/**
+	 * 查询手机号是否存在
+	 * @param phone
+	 * @return
+	 */
+	public int getMemberCountByPhone(String phone);
 }

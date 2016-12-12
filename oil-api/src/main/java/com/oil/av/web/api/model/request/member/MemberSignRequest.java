@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.oil.av.web.api.model.request.BaseRequest;
 
-public class UserSignRequest extends BaseRequest{
+public class MemberSignRequest extends BaseRequest{
 
 	/**
 	 * 
@@ -19,7 +19,7 @@ public class UserSignRequest extends BaseRequest{
 	 */
 	@NotEmpty
 	@Pattern(regexp="^1[34578]\\d{9}$", message="手机号格式不正确")
-	private String userName;
+	private String tel;
 	
 	/**
 	 * 密码
@@ -29,11 +29,17 @@ public class UserSignRequest extends BaseRequest{
 	private String pwd;
 	
 	
-	public String getUserName() {
-		return userName;
+	/**
+	 * @return the tel
+	 */
+	public String getTel() {
+		return tel;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	/**
+	 * @param tel the tel to set
+	 */
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 	public String getPwd() {
 		return pwd;

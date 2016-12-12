@@ -2,27 +2,31 @@ package com.oil.av.web.api.model.response.member;
 
 import com.oil.av.web.api.model.response.BaseResponse;
 
-public class UserSignResponse extends BaseResponse{
+public class MemberSignResponse extends BaseResponse{
 
     /**
      *Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = -939261706201571601L;
 
-    private String	userId;//用户id
+    private String	memberId;//用户id
+    
     private String  phone;//用户手机号
+    
     private String  serial;//用户登陆序列
-	/**
-	 * @return the userId
+
+    
+    /**
+	 * @return the memberId
 	 */
-	public String getUserId() {
-		return userId;
+	public String getMemberId() {
+		return memberId;
 	}
 	/**
-	 * @param userId the userId to set
+	 * @param memberId the memberId to set
 	 */
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	/**
 	 * @return the phone

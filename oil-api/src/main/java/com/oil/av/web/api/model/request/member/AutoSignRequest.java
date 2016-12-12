@@ -19,7 +19,7 @@ public class AutoSignRequest extends BaseRequest{
 	 */
 	@NotEmpty
 	@Pattern(regexp="/^[a-zA-Z0-9]*$/", message="数字和字母的组合")
-	private String userId;
+	private String memberId;
 	
 
 	/**
@@ -29,11 +29,17 @@ public class AutoSignRequest extends BaseRequest{
 	@Pattern(regexp="/^[a-zA-Z0-9]*$/", message="数字和字母的组合")
 	private String serialNumber;
 	
-	public String getUserId() {
-		return userId;
+	/**
+	 * @return the memberId
+	 */
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	/**
+	 * @param memberId the memberId to set
+	 */
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	/**
 	 * @return the serialNumber

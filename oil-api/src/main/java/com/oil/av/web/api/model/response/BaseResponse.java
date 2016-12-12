@@ -12,24 +12,19 @@ public class BaseResponse implements Serializable{
 	/**
 	 * 请求tooken
 	 */
-	@NotEmpty
 	private String token;
 	
 	/**
 	 * 版本号
 	 */
-	@NotEmpty
 	private String version;
 	/**
 	 * 设备号
 	 */
-	@NotEmpty
 	private String deviceCode;
 	/**
 	 * 设备 ios/android
 	 */
-	@NotEmpty
-	@Pattern(regexp = "android|ios|ANDROID|IOS",message = "设备参数有误")
 	private String device;
 	
 	public String getToken() {
