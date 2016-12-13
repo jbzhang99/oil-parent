@@ -44,7 +44,7 @@ public interface MemberDao {
      * @param  memberEntity
      * @return
      */
-	Long insert(MemberEntity memberEntity);
+	Integer insert(MemberEntity memberEntity);
 	
 	/**
      * 更新用户

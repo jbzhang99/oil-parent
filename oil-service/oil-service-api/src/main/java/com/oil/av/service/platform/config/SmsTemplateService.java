@@ -34,7 +34,7 @@ public interface SmsTemplateService {
      * @param  SmsTemplateVo
      * @return
      */
-     public Long addSmsTemplateVo(SmsTemplateVo SmsTemplateVo);
+     public Integer addSmsTemplateVo(SmsTemplateVo SmsTemplateVo);
      
      /**
      * 更新运营管理-短信模板

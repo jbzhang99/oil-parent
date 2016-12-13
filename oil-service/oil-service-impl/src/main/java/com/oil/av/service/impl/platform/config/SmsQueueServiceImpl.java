@@ -52,7 +52,7 @@ public class SmsQueueServiceImpl implements SmsQueueService {
     }
             
      @Override
-     public Long addSmsQueueVo(SmsQueueVo smsQueueVo) {
+     public Integer addSmsQueueVo(SmsQueueVo smsQueueVo) {
      	
 		return smsQueueDao.insert(this.vo2entity(smsQueueVo));
      }

@@ -34,7 +34,7 @@ public interface MemberBusinessService {
      * @param  memberBusinessVo
      * @return
      */
-     public Long addMemberBusinessVo(MemberBusinessVo memberBusinessVo);
+     public Integer addMemberBusinessVo(MemberBusinessVo memberBusinessVo);
      
      /**
      * 更新用户公司信息
@@ -49,4 +49,17 @@ public interface MemberBusinessService {
      * @return
      */
      public Integer  deleteMemberBusinessVo(String id);
+     
+     /**
+ 	 * 更新不为null的字段
+ 	 * @param memberUpdate
+ 	 */
+ 	public Integer updateNotNull(MemberBusinessVo memberBusinessVo);
+
+ 	/**
+ 	 * 按需查询
+ 	 * @param id
+ 	 * @return
+ 	 */
+ 	public List<MemberBusinessVo> getListByConditions(Map<String, Object> mapSms);
 }

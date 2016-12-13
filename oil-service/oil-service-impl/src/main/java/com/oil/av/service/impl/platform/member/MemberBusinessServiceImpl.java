@@ -50,7 +50,7 @@ public class MemberBusinessServiceImpl implements MemberBusinessService {
     }
             
      @Override
-     public Long addMemberBusinessVo(MemberBusinessVo memberBusinessVo) {
+     public Integer addMemberBusinessVo(MemberBusinessVo memberBusinessVo) {
      	
 		return memberBusinessDao.insert(this.vo2entity(memberBusinessVo));
      }
@@ -60,6 +60,11 @@ public class MemberBusinessServiceImpl implements MemberBusinessService {
 		return memberBusinessDao.update(this.vo2entity(memberBusinessVo));
      }
      
+     @Override
+     public Integer updateNotNull(MemberBusinessVo memberBusinessVo){
+    	 return memberBusinessDao.updateNotNull(this.vo2entity(memberBusinessVo));
+     }
+    		 
      @Override
      public Integer deleteMemberBusinessVo(String id) {
 		return memberBusinessDao.delete(id);
@@ -84,4 +89,14 @@ public class MemberBusinessServiceImpl implements MemberBusinessService {
      	BeanUtils.copyProperties(memberBusinessVo, memberBusinessEntity);
      	return memberBusinessEntity;
      }
+
+	@Override
+	public List<MemberBusinessVo> getListByConditions(Map<String, Object> mapSms) {
+		List<MemberBusinessEntity> memberBusinessEntityList = memberBusinessDao.getListByConditions(mapSms);
+    	List<MemberBusinessVo> memberBusinessVoList = new ArrayList<MemberBusinessVo>();
+    	for(MemberBusinessEntity entity : memberBusinessEntityList){
+    		memberBusinessVoList.add(this.entity2vo(entity));
+    	}
+		return memberBusinessVoList;
+	}
 }

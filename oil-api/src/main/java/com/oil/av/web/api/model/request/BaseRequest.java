@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 
 public class BaseRequest implements Serializable{
 
@@ -12,18 +12,18 @@ public class BaseRequest implements Serializable{
 	/**
 	 * 请求tooken
 	 */
-	@NotEmpty
+	@NotBlank
 	private String tooken;
 	
 	/**
 	 * 版本号
 	 */
-	@NotEmpty
+	@NotBlank
 	private String version;
 	/**
 	 * 设备号
 	 */
-	@NotEmpty
+	@NotBlank
 	private String deviceCode;
 	
 	/**
@@ -34,7 +34,7 @@ public class BaseRequest implements Serializable{
 	/**
 	 * 设备 ios/android
 	 */
-	@NotEmpty
+	@NotBlank
 	@Pattern(regexp = "android|ios|ANDROID|IOS",message = "设备参数有误")
 	private String device;
 	

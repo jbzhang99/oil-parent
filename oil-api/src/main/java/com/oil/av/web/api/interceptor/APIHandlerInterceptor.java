@@ -50,7 +50,7 @@ public class APIHandlerInterceptor implements HandlerInterceptor {
     		Object arg2) throws Exception {
     	String reqIp = getIpAddr(req);
     	
-    	String userId = req.getParameter("userId");
+    	String memberId = req.getParameter("memberId");
  	   	String token = req.getParameter("token");
  	   	String version = req.getParameter("version");
  	   	String deviceCode = req.getParameter("deviceCode");
@@ -58,10 +58,10 @@ public class APIHandlerInterceptor implements HandlerInterceptor {
  	   	String serial = req.getParameter("serial");
  	   	
  	    req.getParameterMap().put("ip", new String[]{reqIp});
- 	   	if(StringUtils.isNotEmpty(userId)){
+ 	   	if(StringUtils.isNotBlank(memberId)){
  		   //验证用户token
- 	   		String userToken = TokenUtilsService.createToken(userId, version, reqIp, deviceCode, device);
- 	   		if(tokenUtilsService.checkToken(token, userToken, serial, userId)){
+ 	   		String userToken = TokenUtilsService.createToken(memberId, version, reqIp, deviceCode, device);
+ 	   		if(tokenUtilsService.checkToken(token, userToken, serial, memberId)){
  	   			return true;
  	   		}else{
  	   			//token校验不通过

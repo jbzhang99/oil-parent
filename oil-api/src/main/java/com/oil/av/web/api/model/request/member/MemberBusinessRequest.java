@@ -1,69 +1,49 @@
-package com.oil.av.web.api.model.response.member;
+package com.oil.av.web.api.model.request.member;
+
+
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import com.oil.av.web.api.model.response.BaseResponse;
+import com.oil.av.web.api.model.request.BaseRequest;
 
-public class MemberInfoResponse extends BaseResponse{
+public class MemberBusinessRequest extends BaseRequest{
 
-    /**
-     *Comment for <code>serialVersionUID</code>
-     */
-    private static final long serialVersionUID = -939261706201571601L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * 用户id
-     */
-    private String	memberId;//
-    
-    /**
-     * 用户头像
-     */
-    private String avatar;
+	/**
+	 * 用户ID
+	 */
+	@NotEmpty
+	@Pattern(regexp="^\\w{32}$", message="用户id不正确")
+	private String memberId;
 
-    /**
-     * 昵称
-     */
-    private String nick;
-    
-    /**
-     * 性别
-     */
-    private String sex;
-    
-    /**
-     * 生日
-     */
-    private String birthday;
-    
-    /**
-     * 地址
-     */
-    private String address;
-    
-    /**
-     * 姓名
-     */
-    private String name;
-    
-    /**
-     * 身份证号
-     */
-    private String idCard;
-    
-    /**
+	/**
      * 企业名称
      */
-    private String businessName;
+	@NotBlank
+	private String id;
+	
+	/**
+	 * 企业名称
+	 */
+	@NotBlank
+	private String businessName;
     
     /**
-     * 简介
+     * 企业简介
      */
+	@NotBlank
     private String businessInfo;
     
     /**
      * 经营范围
      */
+	@NotBlank
     private String businessScope;
     
     /**
@@ -95,124 +75,79 @@ public class MemberInfoResponse extends BaseResponse{
      */
 	@NotBlank
     private String invoice;
+
+	/**  
+	 * 获取id  
+	 * @return id id  
+	 */
+	public String getId() {
+		return id;
+	}
 	
-    /**
-	 * @return the memberId
+
+	/**  
+	 * 设置id  
+	 * @param id id  
 	 */
-	public String getMemberId() {
-		return memberId;
+	public void setId(String id) {
+		this.id = id;
 	}
-	/**
-	 * @param memberId the memberId to set
+	
+
+	/**  
+	 * 获取businessName  
+	 * @return businessName businessName  
 	 */
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-	/**
-	 * @return the avatar
-	 */
-	public String getAvatar() {
-		return avatar;
-	}
-	/**
-	 * @param avatar the avatar to set
-	 */
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
-	/**
-	 * @return the nick
-	 */
-	public String getNick() {
-		return nick;
-	}
-	/**
-	 * @param nick the nick to set
-	 */
-	public void setNick(String nick) {
-		this.nick = nick;
-	}
-	/**
-	 * @return the sex
-	 */
-	public String getSex() {
-		return sex;
-	}
-	/**
-	 * @param sex the sex to set
-	 */
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
-	/**
-	 * @return the birthday
-	 */
-	public String getBirthday() {
-		return birthday;
-	}
-	/**
-	 * @param birthday the birthday to set
-	 */
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
-	}
-	/**
-	 * @return the address
-	 */
-	public String getAddress() {
-		return address;
-	}
-	/**
-	 * @param address the address to set
-	 */
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-	/**
-	 * @return the idCard
-	 */
-	public String getIdCard() {
-		return idCard;
-	}
-	public void setIdCard(String idCard) {
-		this.idCard = idCard;
-	}
 	public String getBusinessName() {
 		return businessName;
 	}
+	
+
+	/**  
+	 * 设置businessName  
+	 * @param businessName businessName  
+	 */
 	public void setBusinessName(String businessName) {
 		this.businessName = businessName;
 	}
+	
+
+	/**  
+	 * 获取businessInfo  
+	 * @return businessInfo businessInfo  
+	 */
 	public String getBusinessInfo() {
 		return businessInfo;
 	}
+	
+
+	/**  
+	 * 设置businessInfo  
+	 * @param businessInfo businessInfo  
+	 */
 	public void setBusinessInfo(String businessInfo) {
 		this.businessInfo = businessInfo;
 	}
-	/**
-	 * @return the businessScope
+	
+
+	/**  
+	 * 获取businessScope  
+	 * @return businessScope businessScope  
 	 */
 	public String getBusinessScope() {
 		return businessScope;
 	}
-	/**
-	 * @param businessScope the businessScope to set
+	
+
+	/**  
+	 * 设置businessScope  
+	 * @param businessScope businessScope  
 	 */
 	public void setBusinessScope(String businessScope) {
 		this.businessScope = businessScope;
 	}
+	
+
 	/**  
 	 * 获取touchName  
 	 * @return touchName touchName  
@@ -221,6 +156,7 @@ public class MemberInfoResponse extends BaseResponse{
 		return touchName;
 	}
 	
+
 	/**  
 	 * 设置touchName  
 	 * @param touchName touchName  
@@ -229,6 +165,7 @@ public class MemberInfoResponse extends BaseResponse{
 		this.touchName = touchName;
 	}
 	
+
 	/**  
 	 * 获取touchPhone  
 	 * @return touchPhone touchPhone  
@@ -237,6 +174,7 @@ public class MemberInfoResponse extends BaseResponse{
 		return touchPhone;
 	}
 	
+
 	/**  
 	 * 设置touchPhone  
 	 * @param touchPhone touchPhone  
@@ -245,6 +183,7 @@ public class MemberInfoResponse extends BaseResponse{
 		this.touchPhone = touchPhone;
 	}
 	
+
 	/**  
 	 * 获取bank  
 	 * @return bank bank  
@@ -253,6 +192,7 @@ public class MemberInfoResponse extends BaseResponse{
 		return bank;
 	}
 	
+
 	/**  
 	 * 设置bank  
 	 * @param bank bank  
@@ -261,6 +201,7 @@ public class MemberInfoResponse extends BaseResponse{
 		this.bank = bank;
 	}
 	
+
 	/**  
 	 * 获取bankNumber  
 	 * @return bankNumber bankNumber  
@@ -269,6 +210,7 @@ public class MemberInfoResponse extends BaseResponse{
 		return bankNumber;
 	}
 	
+
 	/**  
 	 * 设置bankNumber  
 	 * @param bankNumber bankNumber  
@@ -277,6 +219,7 @@ public class MemberInfoResponse extends BaseResponse{
 		this.bankNumber = bankNumber;
 	}
 	
+
 	/**  
 	 * 获取invoice  
 	 * @return invoice invoice  
@@ -285,6 +228,7 @@ public class MemberInfoResponse extends BaseResponse{
 		return invoice;
 	}
 	
+
 	/**  
 	 * 设置invoice  
 	 * @param invoice invoice  
@@ -292,6 +236,26 @@ public class MemberInfoResponse extends BaseResponse{
 	public void setInvoice(String invoice) {
 		this.invoice = invoice;
 	}
+
+
+	/**  
+	 * 获取memberId  
+	 * @return memberId memberId  
+	 */
+	public String getMemberId() {
+		return memberId;
+	}
 	
 
+
+	/**  
+	 * 设置memberId  
+	 * @param memberId memberId  
+	 */
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+	
+	
+    
 }

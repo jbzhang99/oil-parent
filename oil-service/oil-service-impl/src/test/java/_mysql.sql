@@ -66,7 +66,7 @@ CREATE TABLE `po_cms_guestbook` (
   `workunit` varchar(100) NOT NULL COMMENT '单位',
   `ip` varchar(100) NOT NULL COMMENT 'IP',
   `create_time` datetime NOT NULL COMMENT '留言时间',
-  `re_user_id` varchar(64) DEFAULT NULL COMMENT '回复人',
+  `re_member_id` varchar(64) DEFAULT NULL COMMENT '回复人',
   `re_date` datetime DEFAULT NULL COMMENT '回复时间',
   `re_content` varchar(100) DEFAULT NULL COMMENT '回复内容',
   `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
@@ -169,8 +169,8 @@ CREATE TABLE `po_order` (
   `order_status` char(1) DEFAULT '0' COMMENT '订单状态:0待处理、1处理-确认、2处理-取消',
   `order_memo` varchar(255) DEFAULT null COMMENT '下单备注',
   `business_name` varchar(255) NOT NULL COMMENT '企业名称',
-  `user_name` varchar(64) NOT NULL COMMENT '联系人',
-  `phone` varchar(20) NOT NULL COMMENT '电话',
+  `touch_name` varchar(64) NOT NULL COMMENT '联系人',
+  `touch_phone` varchar(20) NOT NULL COMMENT '电话',
   `order_goods` decimal(20) NOT NULL COMMENT '订货量/吨',
   `bank` varchar(255) NOT NULL COMMENT '付款行',
   `bank_number` varchar(255) NOT NULL COMMENT '付款账号',
@@ -186,11 +186,11 @@ CREATE TABLE `po_order` (
 DROP TABLE IF EXISTS `pm_member_business`;
 CREATE TABLE `pm_member_business` (
   `id` varchar(64) NOT NULL COMMENT '编码',
-  `user_id` varchar(64) NOT NULL COMMENT '用户id',
+  `member_id` varchar(64) NOT NULL COMMENT '用户id',
   `business_name` varchar(255) NOT NULL COMMENT '企业名称',
   `business_info` varchar(255) DEFAULT NULL COMMENT '企业简介',
   `business_scope` varchar(255) DEFAULT NULL COMMENT '经营范围',
-  `touch_user_name` varchar(20) NOT NULL COMMENT '企业联系人',
+  `touch_name` varchar(20) NOT NULL COMMENT '企业联系人',
   `touch_phone` varchar(20) NOT NULL COMMENT '企业联系电话',
   `bank` varchar(255) NOT NULL COMMENT '付款行',
   `bank_number` varchar(255) NOT NULL COMMENT '付款账号',
@@ -200,7 +200,7 @@ CREATE TABLE `pm_member_business` (
   `modify_user` varchar(50) NOT NULL COMMENT '修改人',
   `modify_time` datetime NOT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`),
-  KEY `t_user_business_user` (`user_id`)
+  KEY `t_member_business_member` (`member_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户管理-公司信息';
 
 DROP TABLE IF EXISTS `pm_member`;
@@ -240,15 +240,15 @@ CREATE TABLE `pm_member_third` (
   `id` varchar(32) NOT NULL COMMENT '主键，表唯一ID',
   `platform` varchar(20) DEFAULT NULL COMMENT '平台类型:enum:weixin,微信;qq,qq;xinlang,新浪;',
   `serial` varchar(200) DEFAULT NULL COMMENT '唯一编码',
-  `username` varchar(50) DEFAULT NULL COMMENT '平台用户名',
+  `name` varchar(50) DEFAULT NULL COMMENT '平台用户名',
   `is_relation` tinyint(1) DEFAULT NULL COMMENT '是否关联',
-  `platform_username` varchar(50) DEFAULT NULL COMMENT '关联账户名称',
+  `platform_name` varchar(50) DEFAULT NULL COMMENT '关联账户名称',
   `platform_avatar` varchar(200) DEFAULT NULL COMMENT '关联账户头像',
   `create_user` varchar(50) NOT NULL COMMENT '创建人',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `modify_user` varchar(50) NOT NULL COMMENT '修改人',
   `modify_time` datetime NOT NULL COMMENT '修改时间',
-  `user_id` bigint(20) DEFAULT NULL COMMENT '注册用户ID',
+  `member_id` bigint(20) DEFAULT NULL COMMENT '注册用户ID',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户管理-三方账户关联';
 
@@ -256,7 +256,7 @@ DROP TABLE IF EXISTS `pm_member_wx`;
 CREATE TABLE `pm_member_wx` (
   `id` varchar(32) NOT NULL COMMENT '主键，表唯一ID',
   `openid` varchar(100) NOT NULL COMMENT '微信标识',
-  `user_id` bigint(20) DEFAULT NULL COMMENT '用户id',
+  `member_id` bigint(20) DEFAULT NULL COMMENT '用户id',
   `is_subscription` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否授权',
   PRIMARY KEY (`id`),
   UNIQUE KEY `openid` (`openid`) USING BTREE,

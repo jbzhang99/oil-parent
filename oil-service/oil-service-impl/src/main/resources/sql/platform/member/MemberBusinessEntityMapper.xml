@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oil.av.dao.platform.member.MemberBusinessDao">
-	<resultMap id="MemberBusinessResult" type="com.oil.av.entity.platform.member.MemberBusinessEntity">
+	<resultMap id="MemberBusinessResult" type="_MemberBusinessEntity">
 			<result property="id" column="id" />	
-			<result property="userId" column="user_id" />	
+			<result property="memberId" column="member_id" />	
 			<result property="businessName" column="business_name" />	
-			<result property="phone" column="phone" />	
+			<result property="businessInfo" column="business_info" />	
+			<result property="businessScope" column="business_scope" />	
+			<result property="touchName" column="touch_name" />	
+			<result property="touchPhone" column="touch_phone" />	
 			<result property="bank" column="bank" />	
 			<result property="bankNumber" column="bank_number" />	
 			<result property="invoice" column="invoice" />	
-			<result property="createBy" column="create_by" />	
-			<result property="createDate" column="create_date" />	
-			<result property="updateBy" column="update_by" />	
-			<result property="updateDate" column="update_date" />	
+			<result property="createUser" column="create_user" />	
+			<result property="createTime" column="create_time" />	
+			<result property="modifyUser" column="modify_user" />	
+			<result property="modifyTime" column="modify_time" />	
 	</resultMap>
 	<sql id="selectAllColumns">
 		<![CDATA[	
 		select
-		id,user_id,business_name,phone,bank,bank_number,invoice,create_by,create_date,update_by,update_date
+		id,member_id,business_name,business_info,business_scope,touch_name,touch_phone,bank,bank_number,invoice,create_user,create_time,modify_user,modify_time
 		from pm_member_business	  
 		]]>
 	</sql>
@@ -27,14 +30,23 @@
 		<if test="params.id !=null and params.id !=''">
 			and id = #{params.id}  
 		</if>		
-		<if test="params.userId !=null and params.userId !=''">
-			and user_id = #{params.userId}  
+		<if test="params.memberId !=null and params.memberId !=''">
+			and member_id = #{params.memberId}  
 		</if>		
 		<if test="params.businessName !=null and params.businessName !=''">
 			and business_name = #{params.businessName}  
 		</if>		
-		<if test="params.phone !=null and params.phone !=''">
-			and phone = #{params.phone}  
+		<if test="params.businessInfo !=null and params.businessInfo !=''">
+			and business_info = #{params.businessInfo}  
+		</if>		
+		<if test="params.businessScope !=null and params.businessScope !=''">
+			and business_scope = #{params.businessScope}  
+		</if>		
+		<if test="params.touchName !=null and params.touchName !=''">
+			and touch_name = #{params.touchName}  
+		</if>		
+		<if test="params.touchPhone !=null and params.touchPhone !=''">
+			and touch_phone = #{params.touchPhone}  
 		</if>		
 		<if test="params.bank !=null and params.bank !=''">
 			and bank = #{params.bank}  
@@ -45,17 +57,17 @@
 		<if test="params.invoice !=null and params.invoice !=''">
 			and invoice = #{params.invoice}  
 		</if>		
-		<if test="params.createBy !=null and params.createBy !=''">
-			and create_by = #{params.createBy}  
+		<if test="params.createUser !=null and params.createUser !=''">
+			and create_user = #{params.createUser}  
 		</if>		
-		<if test="params.createDate !=null">
-			and create_date = #{params.createDate}  
+		<if test="params.createTime !=null">
+			and create_time = #{params.createTime}  
 		</if>				
-		<if test="params.updateBy !=null and params.updateBy !=''">
-			and update_by = #{params.updateBy}  
+		<if test="params.modifyUser !=null and params.modifyUser !=''">
+			and modify_user = #{params.modifyUser}  
 		</if>		
-		<if test="params.updateDate !=null">
-			and update_date = #{params.updateDate}  
+		<if test="params.modifyTime !=null">
+			and modify_time = #{params.modifyTime}  
 		</if>				
 	</sql>
 	
@@ -71,6 +83,11 @@
 		<include refid="selectAllColumns" />
 	</select>
 	
+	<select id="getListByConditions"  resultMap="MemberBusinessResult">
+		<include refid="selectAllColumns" />
+		<include refid="whereAllColumns" />
+	</select>	
+	
 	<select id="getMemberBusinessEntityListByConditions"  resultMap="MemberBusinessResult">
 		<include refid="selectAllColumns" />
 		<include refid="whereAllColumns" />
@@ -80,20 +97,39 @@
 		<![CDATA[	select count(*) from pm_member_business ]]> 
 		<include refid="whereAllColumns" />
 	</select>			
-	<update id="update" parameterType="com.oil.av.entity.platform.member.MemberBusinessEntity">
+	<update id="update" parameterType="_MemberBusinessEntity">
 		<![CDATA[
 		update pm_member_business set  
-		id= #{id},user_id= #{userId},business_name= #{businessName},phone= #{phone},bank= #{bank},bank_number= #{bankNumber},invoice= #{invoice},create_by= #{createBy},create_date= #{createDate},update_by= #{updateBy},update_date= #{updateDate}
+		id= #{id},member_id= #{memberId},business_name= #{businessName},business_info= #{businessInfo},business_scope= #{businessScope},touch_name= #{touchName},touch_phone= #{touchPhone},bank= #{bank},bank_number= #{bankNumber},invoice= #{invoice},modify_user= #{modifyUser},modify_time= now()
 		where id = #{id}
 		]]>
 	</update>
 	
+	<update id="updateNotNull" parameterType="_memberBusinessEntity">
+        update pm_member_business 
+    	<trim prefix="SET" suffixOverrides=",">
+				<if test="memberId != null">member_id= #{memberId},</if>
+				<if test="businessName != null">business_name= #{businessName},</if>
+				<if test="businessInfo != null">business_info= #{businessInfo},</if>
+				<if test="businessScope != null">business_scope= #{businessScope},</if>
+				<if test="touchName != null">touch_name= #{touchName},</if>
+				<if test="touchPhone != null">touch_phone= #{touchPhone},</if>
+				<if test="bank != null">bank= #{bank},</if>
+				<if test="bankNumber != null">bank_number= #{bankNumber},</if>
+				<if test="invoice != null">invoice= #{invoice},</if>
+				<if test="createUser != null">create_user= #{createUser},</if>
+				<if test="createTime != null">create_time= #{createTime},</if>
+				<if test="modifyUser != null">modify_user= #{modifyUser},</if>
+				modify_time= now()
+	    </trim>
+        where id = #{id}
+	</update>
 	
-	<!-- 自动生成主键 <insert id="insert" parameterType="com.oil.av.entity.platform.member.MemberBusinessEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id">-->
-	<insert id="insert" parameterType="com.oil.av.entity.platform.member.MemberBusinessEntity" >
+	<!-- 自动生成主键 <insert id="insert" parameterType="_MemberBusinessEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id">-->
+	<insert id="insert" parameterType="_MemberBusinessEntity" >
 	<![CDATA[
-		insert into pm_member_business(user_id,business_name,phone,bank,bank_number,invoice,create_by,create_date,update_by,update_date)
-		values(#{userId},#{businessName},#{phone},#{bank},#{bankNumber},#{invoice},#{createBy},#{createDate},#{updateBy},#{updateDate})
+		insert into pm_member_business(id,member_id,business_name,business_info,business_scope,touch_name,touch_phone,bank,bank_number,invoice,create_user,create_time,modify_user,modify_time)
+		values(#{id},#{memberId},#{businessName},#{businessInfo},#{businessScope},#{touchName},#{touchPhone},#{bank},#{bankNumber},#{invoice},#{createUser},now(),#{modifyUser},now())
 	]]>
 	</insert>
 	

@@ -34,7 +34,7 @@ public interface MemberService {
      * @param  memberVo
      * @return
      */
-     public Long addMemberVo(MemberVo memberVo);
+     public Integer addMemberVo(MemberVo memberVo);
      
      /**
      * 更新用户

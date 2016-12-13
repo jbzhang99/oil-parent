@@ -44,7 +44,7 @@ public interface SmsQueueDao {
      * @param  smsQueueEntity
      * @return
      */
-	Long insert(SmsQueueEntity smsQueueEntity);
+	Integer insert(SmsQueueEntity smsQueueEntity);
 	
 	/**
      * 更新运营管理-短信队列

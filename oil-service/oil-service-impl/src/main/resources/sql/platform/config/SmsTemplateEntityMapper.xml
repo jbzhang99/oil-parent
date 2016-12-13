@@ -98,8 +98,8 @@
 	<!-- 自动生成主键 <insert id="insert" parameterType="_SmsTemplateEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id">-->
 	<insert id="insert" parameterType="_SmsTemplateEntity" >
 	<![CDATA[
-		insert into po_sms_template(name,content,is_enable,create_user,create_time,modify_user,modify_time)
-		values(#{smsTemplateNameEnum},#{content},#{isEnable},#{createUser},now(),#{modifyUser},now())
+		insert into po_sms_template(id,name,content,is_enable,create_user,create_time,modify_user,modify_time)
+		values(#{id},#{smsTemplateNameEnum},#{content},#{isEnable},#{createUser},now(),#{modifyUser},now())
 	]]>
 	</insert>
 	

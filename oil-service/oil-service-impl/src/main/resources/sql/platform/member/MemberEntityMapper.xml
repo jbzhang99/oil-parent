@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oil.av.dao.platform.member.MemberDao">
-	
 	<resultMap id="MemberResult" type="_MemberEntity">
 			<result property="id" column="id" />	
 			<result property="code" column="code" />	
@@ -13,7 +12,9 @@
 			<result property="profile" column="profile" />	
 			<result property="address" column="address" />	
 			<result property="birthday" column="birthday" />	
+			<result property="fullName" column="full_name" />	
 			<result property="phone" column="phone" />	
+			<result property="idCard" column="idCard" />	
 			<result property="memberStateEnum" column="state" />
 			<result property="isMember" column="is_member" />	
 			<result property="lastLoginTime" column="last_login_time" />	
@@ -32,7 +33,7 @@
 	<sql id="selectAllColumns">
 		<![CDATA[	
 		select
-		id,code,password,nick,sex,avatar,signature,profile,address,birthday,phone,state,is_member,last_login_time,last_ip,last_device,last_device_serial,last_serial_number,create_user,create_time,modify_user,modify_time,wrong_times,wrong_date,public_message
+		id,code,password,nick,sex,avatar,signature,profile,address,birthday,full_name,phone,idCard,state,is_member,last_login_time,last_ip,last_device,last_device_serial,last_serial_number,create_user,create_time,modify_user,modify_time,wrong_times,wrong_date,public_message
 		from pm_member	  
 		]]>
 	</sql>
@@ -69,8 +70,14 @@
 		<if test="params.birthday !=null">
 			and birthday = #{params.birthday}  
 		</if>				
+		<if test="params.fullName !=null and params.fullName !=''">
+			and full_name = #{params.fullName}  
+		</if>		
 		<if test="params.phone !=null and params.phone !=''">
 			and phone = #{params.phone}  
+		</if>		
+		<if test="params.idCard !=null and params.idCard !=''">
+			and idCard = #{params.idCard}  
 		</if>		
 		<if test="params.memberStateEnum !=null">
 			and state = #{params.memberStateEnum}
@@ -122,6 +129,12 @@
 		<include refid="selectAllColumns" />
 		where phone= #{phone}
 	</select>
+	
+	<select id="getListByConditions"  resultMap="MemberResult">
+		<include refid="selectAllColumns" />
+		<include refid="whereAllColumns" />
+	</select>
+	
 	<!-- 更加userId查找序列号 -->
 	<select id="getSerialById" resultType="String">
 		<![CDATA[	select last_serial_number from pm_member ]]>
@@ -146,6 +159,7 @@
     </update>
 <!-- end -->
 	
+	
 	<select id="get" parameterType="Long" resultMap="MemberResult">
 	    <include refid="selectAllColumns" />
 		 where id = #{id}
@@ -167,7 +181,7 @@
 	<update id="update" parameterType="_MemberEntity">
 		<![CDATA[
 		update pm_member set  
-		id= #{id},code= #{code},password= #{password},nick= #{nick},sex= #{memberSexEnum},avatar= #{avatar},signature= #{signature},profile= #{profile},address= #{address},birthday= #{birthday},phone= #{phone},state= #{memberStateEnum},is_member= #{isMember},last_login_time= #{lastLoginTime},last_ip= #{lastIp},last_device= #{lastDevice},last_device_serial= #{lastDeviceSerial},last_serial_number= #{lastSerialNumber},modify_user= #{modifyUser},modify_time= now(),wrong_times= #{wrongTimes},wrong_date= #{wrongDate},public_message= #{memberPublicMessageEnum}
+		id= #{id},code= #{code},password= #{password},nick= #{nick},sex= #{memberSexEnum},avatar= #{avatar},signature= #{signature},profile= #{profile},address= #{address},birthday= #{birthday},full_name= #{fullName},phone= #{phone},idCard= #{idCard},state= #{memberStateEnum},is_member= #{isMember},last_login_time= #{lastLoginTime},last_ip= #{lastIp},last_device= #{lastDevice},last_device_serial= #{lastDeviceSerial},last_serial_number= #{lastSerialNumber},modify_user= #{modifyUser},modify_time= now(),wrong_times= #{wrongTimes},wrong_date= #{wrongDate},public_message= #{memberPublicMessageEnum}
 		where id = #{id}
 		]]>
 	</update>
@@ -184,7 +198,9 @@
 				<if test="profile != null">profile= #{profile},</if>
 				<if test="address != null">address= #{address},</if>
 				<if test="birthday != null">birthday= #{birthday},</if>
+				<if test="fullName != null">full_name= #{fullName},</if>
 				<if test="phone != null">phone= #{phone},</if>
+				<if test="idCard != null">idCard= #{idCard},</if>
 				<if test="memberStateEnum != null">state= #{memberStateEnum},</if>
 				<if test="isMember != null">is_member= #{isMember},</if>
 				<if test="lastLoginTime != null">last_login_time= #{lastLoginTime},</if>
@@ -206,8 +222,8 @@
 	<!-- 自动生成主键 <insert id="insert" parameterType="_MemberEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id">-->
 	<insert id="insert" parameterType="_MemberEntity" >
 	<![CDATA[
-		insert into pm_member(id,code,password,nick,sex,avatar,signature,profile,address,birthday,phone,state,is_member,last_login_time,last_ip,last_device,last_device_serial,last_serial_number,create_user,create_time,modify_user,modify_time,wrong_times,wrong_date,public_message)
-		values(#{id},#{code},#{password},#{nick},#{memberSexEnum},#{avatar},#{signature},#{profile},#{address},#{birthday},#{phone},#{memberStateEnum},#{isMember},#{lastLoginTime},#{lastIp},#{lastDevice},#{lastDeviceSerial},#{lastSerialNumber},#{createUser},now(),#{modifyUser},now(),#{wrongTimes},#{wrongDate},#{memberPublicMessageEnum})
+		insert into pm_member(id,code,password,nick,sex,avatar,signature,profile,address,birthday,full_name,phone,idCard,state,is_member,last_login_time,last_ip,last_device,last_device_serial,last_serial_number,create_user,create_time,modify_user,modify_time,wrong_times,wrong_date,public_message)
+		values(#{id},#{code},#{password},#{nick},#{memberSexEnum},#{avatar},#{signature},#{profile},#{address},#{birthday},#{fullName},#{phone},#{idCard},#{memberStateEnum},#{isMember},#{lastLoginTime},#{lastIp},#{lastDevice},#{lastDeviceSerial},#{lastSerialNumber},#{createUser},now(),#{modifyUser},now(),#{wrongTimes},#{wrongDate},#{memberPublicMessageEnum})
 	]]>
 	</insert>
 	

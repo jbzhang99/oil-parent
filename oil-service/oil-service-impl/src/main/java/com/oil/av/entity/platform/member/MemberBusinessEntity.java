@@ -4,23 +4,26 @@ import java.io.Serializable;
 
 import com.oil.framework.base.entity.BaseEntity;
 /**
- * 用户公司信息
+ * 用户管理-公司信息
  * <p>Table: <strong>pm_member_business</strong>
  * <p><table class="er-mapping" cellspacing=0 cellpadding=0 style="border:solid 1 #666;padding:3px;">
  *   <tr style="background-color:#ddd;Text-align:Left;">
  *     <th nowrap>属性名</th><th nowrap>属性类型</th><th nowrap>字段名</th><th nowrap>字段类型</th><th nowrap>说明</th>
  *   </tr>
  *   <tr><td>id</td><td>{@link java.lang.String}</td><td>id</td><td>varchar</td><td>编码</td></tr>
- *   <tr><td>userId</td><td>{@link java.lang.String}</td><td>user_id</td><td>varchar</td><td>用户id</td></tr>
+ *   <tr><td>memberId</td><td>{@link java.lang.String}</td><td>member_id</td><td>varchar</td><td>用户id</td></tr>
  *   <tr><td>businessName</td><td>{@link java.lang.String}</td><td>business_name</td><td>varchar</td><td>企业名称</td></tr>
- *   <tr><td>phone</td><td>{@link java.lang.String}</td><td>phone</td><td>varchar</td><td>电话</td></tr>
+ *   <tr><td>businessInfo</td><td>{@link java.lang.String}</td><td>business_info</td><td>varchar</td><td>企业简介</td></tr>
+ *   <tr><td>businessScope</td><td>{@link java.lang.String}</td><td>business_scope</td><td>varchar</td><td>经营范围</td></tr>
+ *   <tr><td>touchName</td><td>{@link java.lang.String}</td><td>touch_name</td><td>varchar</td><td>企业联系人</td></tr>
+ *   <tr><td>touchPhone</td><td>{@link java.lang.String}</td><td>touch_phone</td><td>varchar</td><td>企业联系电话</td></tr>
  *   <tr><td>bank</td><td>{@link java.lang.String}</td><td>bank</td><td>varchar</td><td>付款行</td></tr>
  *   <tr><td>bankNumber</td><td>{@link java.lang.String}</td><td>bank_number</td><td>varchar</td><td>付款账号</td></tr>
  *   <tr><td>invoice</td><td>{@link java.lang.String}</td><td>invoice</td><td>varchar</td><td>发票信息</td></tr>
- *   <tr><td>createBy</td><td>{@link java.lang.String}</td><td>create_by</td><td>varchar</td><td>创建者</td></tr>
- *   <tr><td>createDate</td><td>{@link java.util.Date}</td><td>create_date</td><td>datetime</td><td>创建时间</td></tr>
- *   <tr><td>updateBy</td><td>{@link java.lang.String}</td><td>update_by</td><td>varchar</td><td>更新者</td></tr>
- *   <tr><td>updateDate</td><td>{@link java.util.Date}</td><td>update_date</td><td>datetime</td><td>更新时间</td></tr>
+ *   <tr><td>createUser</td><td>{@link java.lang.String}</td><td>create_user</td><td>varchar</td><td>创建人</td></tr>
+ *   <tr><td>createTime</td><td>{@link java.util.Date}</td><td>create_time</td><td>datetime</td><td>创建时间</td></tr>
+ *   <tr><td>modifyUser</td><td>{@link java.lang.String}</td><td>modify_user</td><td>varchar</td><td>修改人</td></tr>
+ *   <tr><td>modifyTime</td><td>{@link java.util.Date}</td><td>modify_time</td><td>datetime</td><td>修改时间</td></tr>
  * </table>
  */
 public class MemberBusinessEntity extends BaseEntity implements Serializable {
@@ -41,19 +44,19 @@ public class MemberBusinessEntity extends BaseEntity implements Serializable {
  			this.id = id;
  		} 				
  		
- 		private java.lang.String userId;
+ 		private java.lang.String memberId;
  		/**
 	     * 获取用户id
 	     */
- 		public java.lang.String getUserId(){
- 			return this.userId;
+ 		public java.lang.String getMemberId(){
+ 			return this.memberId;
  		}
  		
  		/**
 	     * 设置用户id
 	     */
- 		public void setUserId(java.lang.String userId){
- 			this.userId = userId;
+ 		public void setMemberId(java.lang.String memberId){
+ 			this.memberId = memberId;
  		} 				
  		
  		private java.lang.String businessName;
@@ -71,19 +74,64 @@ public class MemberBusinessEntity extends BaseEntity implements Serializable {
  			this.businessName = businessName;
  		} 				
  		
- 		private java.lang.String phone;
+ 		private java.lang.String businessInfo;
  		/**
-	     * 获取电话
+	     * 获取企业简介
 	     */
- 		public java.lang.String getPhone(){
- 			return this.phone;
+ 		public java.lang.String getBusinessInfo(){
+ 			return this.businessInfo;
  		}
  		
  		/**
-	     * 设置电话
+	     * 设置企业简介
 	     */
- 		public void setPhone(java.lang.String phone){
- 			this.phone = phone;
+ 		public void setBusinessInfo(java.lang.String businessInfo){
+ 			this.businessInfo = businessInfo;
+ 		} 				
+ 		
+ 		private java.lang.String businessScope;
+ 		/**
+	     * 获取经营范围
+	     */
+ 		public java.lang.String getBusinessScope(){
+ 			return this.businessScope;
+ 		}
+ 		
+ 		/**
+	     * 设置经营范围
+	     */
+ 		public void setBusinessScope(java.lang.String businessScope){
+ 			this.businessScope = businessScope;
+ 		} 				
+ 		
+ 		private java.lang.String touchName;
+ 		/**
+	     * 获取企业联系人
+	     */
+ 		public java.lang.String getTouchName(){
+ 			return this.touchName;
+ 		}
+ 		
+ 		/**
+	     * 设置企业联系人
+	     */
+ 		public void setTouchName(java.lang.String touchName){
+ 			this.touchName = touchName;
+ 		} 				
+ 		
+ 		private java.lang.String touchPhone;
+ 		/**
+	     * 获取企业联系电话
+	     */
+ 		public java.lang.String getTouchPhone(){
+ 			return this.touchPhone;
+ 		}
+ 		
+ 		/**
+	     * 设置企业联系电话
+	     */
+ 		public void setTouchPhone(java.lang.String touchPhone){
+ 			this.touchPhone = touchPhone;
  		} 				
  		
  		private java.lang.String bank;
@@ -131,64 +179,64 @@ public class MemberBusinessEntity extends BaseEntity implements Serializable {
  			this.invoice = invoice;
  		} 				
  		
- 		private java.lang.String createBy;
+ 		private java.lang.String createUser;
  		/**
-	     * 获取创建者
+	     * 获取创建人
 	     */
- 		public java.lang.String getCreateBy(){
- 			return this.createBy;
+ 		public java.lang.String getCreateUser(){
+ 			return this.createUser;
  		}
  		
  		/**
-	     * 设置创建者
+	     * 设置创建人
 	     */
- 		public void setCreateBy(java.lang.String createBy){
- 			this.createBy = createBy;
+ 		public void setCreateUser(java.lang.String createUser){
+ 			this.createUser = createUser;
  		} 				
  		
- 		private java.util.Date createDate;
+ 		private java.util.Date createTime;
  		/**
 	     * 获取创建时间
 	     */
- 		public java.util.Date getCreateDate(){
- 			return this.createDate;
+ 		public java.util.Date getCreateTime(){
+ 			return this.createTime;
  		}
  		
  		/**
 	     * 设置创建时间
 	     */
- 		public void setCreateDate(java.util.Date createDate){
- 			this.createDate = createDate;
+ 		public void setCreateTime(java.util.Date createTime){
+ 			this.createTime = createTime;
  		} 				
  		
- 		private java.lang.String updateBy;
+ 		private java.lang.String modifyUser;
  		/**
-	     * 获取更新者
+	     * 获取修改人
 	     */
- 		public java.lang.String getUpdateBy(){
- 			return this.updateBy;
+ 		public java.lang.String getModifyUser(){
+ 			return this.modifyUser;
  		}
  		
  		/**
-	     * 设置更新者
+	     * 设置修改人
 	     */
- 		public void setUpdateBy(java.lang.String updateBy){
- 			this.updateBy = updateBy;
+ 		public void setModifyUser(java.lang.String modifyUser){
+ 			this.modifyUser = modifyUser;
  		} 				
  		
- 		private java.util.Date updateDate;
+ 		private java.util.Date modifyTime;
  		/**
-	     * 获取更新时间
+	     * 获取修改时间
 	     */
- 		public java.util.Date getUpdateDate(){
- 			return this.updateDate;
+ 		public java.util.Date getModifyTime(){
+ 			return this.modifyTime;
  		}
  		
  		/**
-	     * 设置更新时间
+	     * 设置修改时间
 	     */
- 		public void setUpdateDate(java.util.Date updateDate){
- 			this.updateDate = updateDate;
+ 		public void setModifyTime(java.util.Date modifyTime){
+ 			this.modifyTime = modifyTime;
  		} 				
  		
  }

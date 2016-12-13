@@ -35,7 +35,7 @@ public interface SmsQueueService {
      * @param  smsQueueVo
      * @return
      */
-     public Long addSmsQueueVo(SmsQueueVo smsQueueVo);
+     public Integer addSmsQueueVo(SmsQueueVo smsQueueVo);
      
      /**
      * 更新运营管理-短信队列

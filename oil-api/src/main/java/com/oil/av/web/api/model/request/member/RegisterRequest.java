@@ -2,6 +2,7 @@ package com.oil.av.web.api.model.request.member;
 
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.oil.av.web.api.model.request.BaseRequest;
@@ -27,8 +28,8 @@ public class RegisterRequest extends BaseRequest{
     /**
      * 昵称
      */
-	@NotEmpty
-    private String nickName;
+	@NotBlank
+	private String nickName;
     
     /**
      * 密码

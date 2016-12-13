@@ -50,7 +50,7 @@ public class MemberServiceImpl implements MemberService {
     }
             
      @Override
-     public Long addMemberVo(MemberVo memberVo) {
+     public Integer addMemberVo(MemberVo memberVo) {
      	
 		return memberDao.insert(this.vo2entity(memberVo));
      }

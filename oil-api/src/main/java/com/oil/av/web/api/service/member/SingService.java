@@ -182,7 +182,7 @@ public class SingService {
 		String serial = WxSignUtil.createSerial(serialMap);
 		memberVo.setLastSerialNumber(serial);
         try {
-        	Long returnL = memberService.addMemberVo(memberVo);
+        	int returnL = memberService.addMemberVo(memberVo);
         	if(returnL == 1){
         		msr.setMemberId(memberVo.getId());
         		//TODO 缓存存放

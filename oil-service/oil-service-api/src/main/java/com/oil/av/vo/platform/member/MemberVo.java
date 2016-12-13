@@ -5,7 +5,7 @@ import com.oil.av.em.MemberSexEnum;
 import com.oil.av.em.MemberStateEnum;
 import com.oil.framework.base.vo.BaseVo; 			
 /**
- * 用户
+ * 用户管理-用户
  * <p>Table: <strong>pm_member</strong>
  * <p><table class="er-mapping" cellspacing=0 cellpadding=0 style="border:solid 1 #666;padding:3px;">
  *   <tr style="background-color:#ddd;Text-align:Left;">
@@ -21,7 +21,9 @@ import com.oil.framework.base.vo.BaseVo;
  *   <tr><td>profile</td><td>{@link java.lang.String}</td><td>profile</td><td>varchar</td><td>个人简介</td></tr>
  *   <tr><td>address</td><td>{@link java.lang.String}</td><td>address</td><td>varchar</td><td>地址</td></tr>
  *   <tr><td>birthday</td><td>{@link java.util.Date}</td><td>birthday</td><td>datetime</td><td>出生日期</td></tr>
+ *   <tr><td>fullName</td><td>{@link java.lang.String}</td><td>full_name</td><td>varchar</td><td>姓名</td></tr>
  *   <tr><td>phone</td><td>{@link java.lang.String}</td><td>phone</td><td>varchar</td><td>手机号码</td></tr>
+ *   <tr><td>idCard</td><td>{@link java.lang.String}</td><td>idCard</td><td>varchar</td><td>身份证号</td></tr>
  *   <tr><td>memberStateEnum</td><td>{@link java.lang.String}</td><td>state</td><td>varchar</td><td>账号状态:enum:normal,正常;lock,锁定;destroy,注销;seal,封号;safety,安全问题;</td></tr>
  *   <tr><td>isMember</td><td>{@link java.lang.Boolean}</td><td>is_member</td><td>tinyint</td><td>是否会员用户</td></tr>
  *   <tr><td>lastLoginTime</td><td>{@link java.util.Date}</td><td>last_login_time</td><td>datetime</td><td>最后登录时间</td></tr>
@@ -191,6 +193,21 @@ public class MemberVo extends BaseVo{
  			this.birthday = birthday;
  		} 				
  		
+ 		private java.lang.String fullName;
+ 		/**
+	     * 获取姓名
+	     */
+ 		public java.lang.String getFullName(){
+ 			return this.fullName;
+ 		}
+ 		
+ 		/**
+	     * 设置姓名
+	     */
+ 		public void setFullName(java.lang.String fullName){
+ 			this.fullName = fullName;
+ 		} 				
+ 		
  		private java.lang.String phone;
  		/**
 	     * 获取手机号码
@@ -204,6 +221,21 @@ public class MemberVo extends BaseVo{
 	     */
  		public void setPhone(java.lang.String phone){
  			this.phone = phone;
+ 		} 				
+ 		
+ 		private java.lang.String idCard;
+ 		/**
+	     * 获取身份证号
+	     */
+ 		public java.lang.String getIdCard(){
+ 			return this.idCard;
+ 		}
+ 		
+ 		/**
+	     * 设置身份证号
+	     */
+ 		public void setIdCard(java.lang.String idCard){
+ 			this.idCard = idCard;
  		} 				
  		
  		private MemberStateEnum memberStateEnum;

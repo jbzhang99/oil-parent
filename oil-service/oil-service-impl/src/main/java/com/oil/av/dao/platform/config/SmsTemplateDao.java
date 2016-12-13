@@ -44,7 +44,7 @@ public interface SmsTemplateDao {
      * @param  SmsTemplateEntity
      * @return
      */
-	Long insert(SmsTemplateEntity SmsTemplateEntity);
+	Integer insert(SmsTemplateEntity SmsTemplateEntity);
 	
 	/**
      * 更新运营管理-短信模板

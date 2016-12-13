@@ -1,13 +1,12 @@
 package com.oil.av.web.api.model.request.member;
 
 
-import javax.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.NotBlank;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import com.oil.av.web.api.model.request.BaseMemberRequest;
 
-import com.oil.av.web.api.model.request.BaseRequest;
+public class MemberInfoRequest extends BaseMemberRequest{
 
-public class MemberInfoRequest extends BaseRequest{
 
 	/**
 	 * 
@@ -15,18 +14,144 @@ public class MemberInfoRequest extends BaseRequest{
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 用户ID
+     * 用户头像
+     */
+	@NotBlank
+    private String avatar;
+    
+    /**
+     * 昵称
+     */
+	@NotBlank
+    private String nick;
+    
+    /**
+     * 性别
+     */
+	@NotBlank
+    private String sex;
+    
+    /**
+     * 生日
+     */
+	@NotBlank
+    private String birthday;
+    
+    /**
+     * 地址
+     */
+	@NotBlank
+    private String address;
+    
+    /**
+     * 姓名
+     */
+	@NotBlank
+    private String name;
+    
+    /**
+     * 身份证号
+     */
+	@NotBlank
+    private String idCard;
+    
+    
+	/**
+	 * @return the avatar
 	 */
-	@NotEmpty
-	@Pattern(regexp="^\\w{32}$", message="用户id不正确")
-	private String id;
-
-	public String getId() {
-		return id;
+	public String getAvatar() {
+		return avatar;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	/**
+	 * @param avatar the avatar to set
+	 */
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	/**
+	 * @return the nick
+	 */
+	public String getNick() {
+		return nick;
+	}
+
+	/**
+	 * @param nick the nick to set
+	 */
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
+	/**
+	 * @return the sex
+	 */
+	public String getSex() {
+		return sex;
+	}
+
+	/**
+	 * @param sex the sex to set
+	 */
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	/**
+	 * @return the birthday
+	 */
+	public String getBirthday() {
+		return birthday;
+	}
+
+	/**
+	 * @param birthday the birthday to set
+	 */
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	/**
+	 * @return the address
+	 */
+	public String getAddress() {
+		return address;
+	}
+
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the idCard
+	 */
+	public String getIdCard() {
+		return idCard;
+	}
+
+	/**
+	 * @param idCard the idCard to set
+	 */
+	public void setIdCard(String idCard) {
+		this.idCard = idCard;
 	}
 	
 }

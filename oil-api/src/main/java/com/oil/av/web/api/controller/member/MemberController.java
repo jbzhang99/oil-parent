@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oil.av.web.api.controller.BaseController;
+import com.oil.av.web.api.model.request.BaseMemberRequest;
+import com.oil.av.web.api.model.request.member.MemberBusinessRequest;
 import com.oil.av.web.api.model.request.member.MemberInfoRequest;
 import com.oil.av.web.api.model.response.member.MemberInfoResponse;
 import com.oil.av.web.api.service.member.MemberInfoService;
@@ -40,7 +42,7 @@ public class MemberController extends BaseController {
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	@ResponseBody
     @RequestMapping(value = "/baseInfo", method = RequestMethod.POST)
-    public JsonResult baseInfo(@Valid MemberInfoRequest mir,BindingResult br ){
+    public JsonResult baseInfo(@Valid BaseMemberRequest bmr,BindingResult br ){
     	JsonResult jsonResult = new JsonResult();
     	if(br.hasErrors()){
 			this.illParamsResult(jsonResult, br);
@@ -48,8 +50,8 @@ public class MemberController extends BaseController {
 		}
     	
     	try{
-			MemberInfoResponse uir = memberInfoService.getMemberInfoByid(mir);
-			jsonResult.setDataObject(uir);
+			MemberInfoResponse mir = memberInfoService.getMemberInfoByid(bmr);
+			jsonResult.setDataObject(mir);
 		}catch(BusinessException be){
 			this.businessExceptionResult(jsonResult, be);
 		}catch(Exception e){
@@ -85,5 +87,31 @@ public class MemberController extends BaseController {
     	return jsonResult;
     }
     
-    
+    /**
+     * 修改个人企业信息
+     * @param request
+     * @param modelMap
+     * @return
+     * @throws BusinessException 
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @ResponseBody
+    @RequestMapping(value = "/upBusiness", method = RequestMethod.POST)
+    public JsonResult updateMyBusiness(@Valid MemberBusinessRequest mbr,BindingResult br ){
+    	JsonResult jsonResult = new JsonResult();
+    	if(br.hasErrors()){
+    		this.illParamsResult(jsonResult, br);
+    		return jsonResult;
+    	}
+    	
+    	try{
+    		MemberInfoResponse uir = memberInfoService.modifyMemberBusinessInfo(mbr);
+    		jsonResult.setDataObject(uir);
+    	}catch(BusinessException be){
+    		this.businessExceptionResult(jsonResult, be);
+    	}catch(Exception e){
+    		this.exceptionResult(jsonResult);
+    	}
+    	return jsonResult;
+    }
 }

@@ -130,8 +130,8 @@
 	<!-- 自动生成主键 <insert id="insert" parameterType="_SmsQueueEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id">-->
 	<insert id="insert" parameterType="_SmsQueueEntity" >
 	<![CDATA[
-		insert into po_sms_queue(template_id,type,name,phone,content,send_times,is_success,success_time,last_send_time,create_user,create_time,modify_user,modify_time)
-		values(#{templateId},#{smsQueueTypeEnum},#{name},#{phone},#{content},#{sendTimes},#{isSuccess},#{successTime},#{lastSendTime},#{createUser},now(),#{modifyUser},now())
+		insert into po_sms_queue(id,template_id,type,name,phone,content,send_times,is_success,success_time,last_send_time,create_user,create_time,modify_user,modify_time)
+		values(#{id},#{templateId},#{smsQueueTypeEnum},#{name},#{phone},#{content},#{sendTimes},#{isSuccess},#{successTime},#{lastSendTime},#{createUser},now(),#{modifyUser},now())
 	]]>
 	</insert>
 	

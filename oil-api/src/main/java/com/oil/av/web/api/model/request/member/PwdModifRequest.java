@@ -2,6 +2,7 @@ package com.oil.av.web.api.model.request.member;
 
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.oil.av.web.api.model.request.BaseRequest;
@@ -20,7 +21,7 @@ public class PwdModifRequest extends BaseRequest{
 	/**
 	 * 请求tooken
 	 */
-	@NotEmpty
+	@NotBlank
 	private String tooken;
 	
 	 /**

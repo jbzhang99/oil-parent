@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.oil.av.entity.platform.member.MemberBusinessEntity;
+import com.oil.av.vo.platform.member.MemberBusinessVo;
 import com.oil.framework.common.page.Pagination;
 
 
@@ -44,7 +45,7 @@ public interface MemberBusinessDao {
      * @param  memberBusinessEntity
      * @return
      */
-	Long insert(MemberBusinessEntity memberBusinessEntity);
+	Integer insert(MemberBusinessEntity memberBusinessEntity);
 	
 	/**
      * 更新用户公司信息
@@ -59,4 +60,18 @@ public interface MemberBusinessDao {
      * @return
      */
 	Integer delete(java.lang.String id);
+
+	/**
+	 * 更新用户公司信息
+	 * @param vo2entity
+	 * @return
+	 */
+	Integer updateNotNull(MemberBusinessEntity vo2entity);
+
+ 	/**
+ 	 * 按需查询
+ 	 * @param mapSms
+ 	 * @return
+ 	 */
+	List<MemberBusinessEntity> getListByConditions(Map<String, Object> mapSms);
 }

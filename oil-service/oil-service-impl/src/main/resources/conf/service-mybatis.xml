@@ -22,6 +22,7 @@
 	<typeAliases>  
 		 <!-- 针对单个别名定义 type:类型的路径 alias:别名 -->  
 	   	 <typeAlias type="com.oil.av.entity.platform.member.MemberEntity" alias="_MemberEntity"/>  
+	   	 <typeAlias type="com.oil.av.entity.platform.member.MemberBusinessEntity" alias="_MemberBusinessEntity"/>
 	   	 <typeAlias type="com.oil.av.entity.platform.config.SmsQueueEntity" alias="_SmsQueueEntity"/>
 	   	 <typeAlias type="com.oil.av.entity.platform.config.SmsTemplateEntity" alias="_SmsTemplateEntity"/>
 	</typeAliases>

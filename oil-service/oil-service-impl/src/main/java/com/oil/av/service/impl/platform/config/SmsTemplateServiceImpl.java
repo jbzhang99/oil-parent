@@ -50,7 +50,7 @@ public class SmsTemplateServiceImpl implements SmsTemplateService {
     }
             
      @Override
-     public Long addSmsTemplateVo(SmsTemplateVo SmsTemplateVo) {
+     public Integer addSmsTemplateVo(SmsTemplateVo SmsTemplateVo) {
      	
 		return SmsTemplateDao.insert(this.vo2entity(SmsTemplateVo));
      }
