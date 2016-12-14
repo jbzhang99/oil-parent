@@ -3,7 +3,7 @@
 DROP TABLE IF EXISTS `po_cms_article`;
 
 CREATE TABLE `po_cms_article` (
-  `id` varchar(64) NOT NULL COMMENT '编号',
+  `id` varchar(32) NOT NULL COMMENT '编号',
   `category_id` varchar(64) NOT NULL COMMENT '栏目编号',
   `title` varchar(255) NOT NULL COMMENT '标题',
   `image` varchar(255) DEFAULT NULL COMMENT '文章缩略图片',
@@ -27,8 +27,8 @@ CREATE TABLE `po_cms_article` (
 
 DROP TABLE IF EXISTS `po_cms_category`;
 CREATE TABLE `po_cms_category` (
-  `id` varchar(64) NOT NULL COMMENT '编号',
-  `parent_id` varchar(64) NOT NULL COMMENT '父级编号',
+  `id` varchar(32) NOT NULL COMMENT '编号',
+  `parent_id` varchar(32) NOT NULL COMMENT '父级编号',
   `office_id` varchar(64) DEFAULT NULL COMMENT '归属机构',
   `cat_type` varchar(20) DEFAULT NULL COMMENT '栏目类型',
   `name` varchar(100) NOT NULL COMMENT '栏目名称',
@@ -54,7 +54,7 @@ CREATE TABLE `po_cms_category` (
 
 DROP TABLE IF EXISTS `po_cms_guestbook`;
 CREATE TABLE `po_cms_guestbook` (
-  `id` varchar(64) NOT NULL COMMENT '编号',
+  `id` varchar(32) NOT NULL COMMENT '编号',
   `content` varchar(255) NOT NULL COMMENT '留言内容',
   `image1` varchar(255) DEFAULT NULL COMMENT '上传图片1',
   `image2` varchar(255) DEFAULT NULL COMMENT '上传图片2',
@@ -76,8 +76,8 @@ CREATE TABLE `po_cms_guestbook` (
 
 DROP TABLE IF EXISTS `po_business_notice`;
 CREATE TABLE `po_business_notice` (
-  `id` varchar(64) NOT NULL COMMENT '编号',
-  `category_id` varchar(64) NOT NULL COMMENT '栏目编号',
+  `id` varchar(32) NOT NULL COMMENT '编号',
+  `category_id` varchar(32) NOT NULL COMMENT '栏目编号',
   `content` varchar(255) DEFAULT NULL COMMENT '内容',
   `is_show` char(1) DEFAULT '1' COMMENT '是否显示',
   `create_user` varchar(50) NOT NULL COMMENT '创建人',
@@ -167,8 +167,10 @@ CREATE TABLE `po_product_parameter_value` (
 
 DROP TABLE IF EXISTS `po_order`;
 CREATE TABLE `po_order` (
-  `id` varchar(64) NOT NULL COMMENT '订单id',
-  `order_sn` varchar(64) NOT NULL COMMENT '订单编号',
+  `id` varchar(32) NOT NULL COMMENT '订单id',
+  `order_sn` varchar(20) NOT NULL COMMENT '订单编号',
+  `member_id` varchar(20) NOT NULL COMMENT '会员编号',
+  `product_id` varchar(20) NOT NULL COMMENT '商品编号',
   `order_type` char(1) DEFAULT '0' COMMENT '订单类型:0采购、1销售',
   `order_status` char(1) DEFAULT '0' COMMENT '订单状态:0待处理、1处理-确认、2处理-取消',
   `order_memo` varchar(255) DEFAULT null COMMENT '下单备注',
@@ -184,12 +186,14 @@ CREATE TABLE `po_order` (
   `modify_user` varchar(50) NOT NULL COMMENT '修改人',
   `modify_time` datetime NOT NULL COMMENT '修改时间',
   `description` varchar(255) DEFAULT NULL COMMENT '处理描述',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `po_order_member` (`member_id`),
+  KEY `po_order_product` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='运营管理-订单';
 
 DROP TABLE IF EXISTS `pm_member_business`;
 CREATE TABLE `pm_member_business` (
-  `id` varchar(64) NOT NULL COMMENT '编码',
+  `id` varchar(32) NOT NULL COMMENT '编码',
   `member_id` varchar(64) NOT NULL COMMENT '用户id',
   `business_name` varchar(255) NOT NULL COMMENT '企业名称',
   `business_info` varchar(255) DEFAULT NULL COMMENT '企业简介',
