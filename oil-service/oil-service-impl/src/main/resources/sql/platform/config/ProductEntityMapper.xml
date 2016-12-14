@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oil.av.dao.platform.config.ProductDao">
+	<resultMap id="ProductResult" type="_ProductEntity">
+			<result property="id" column="id" />	
+			<result property="name" column="name" />	
+			<result property="categoryId" column="category_id" />	
+			<result property="image" column="image" />	
+			<result property="introduction" column="introduction" />	
+			<result property="keywords" column="keywords" />	
+			<result property="weight" column="weight" />	
+			<result property="isShow" column="is_show" />	
+			<result property="monthHits" column="month_hits" />	
+			<result property="monthHitsDate" column="month_hits_date" />	
+			<result property="monthSales" column="month_sales" />	
+			<result property="monthSalesDate" column="month_sales_date" />	
+			<result property="createUser" column="create_user" />	
+			<result property="createTime" column="create_time" />	
+			<result property="modifyUser" column="modify_user" />	
+			<result property="modifyTime" column="modify_time" />	
+			<result property="description" column="description" />	
+			<result property="attributeValue0" column="attribute_value0" />	
+			<result property="attributeValue1" column="attribute_value1" />	
+			<result property="attributeValue2" column="attribute_value2" />	
+			<result property="attributeValue3" column="attribute_value3" />	
+			<result property="attributeValue4" column="attribute_value4" />	
+	</resultMap>
+	<sql id="selectAllColumns">
+		<![CDATA[	
+		select
+		id,name,category_id,image,introduction,keywords,weight,is_show,month_hits,month_hits_date,month_sales,month_sales_date,create_user,create_time,modify_user,modify_time,description,attribute_value0,attribute_value1,attribute_value2,attribute_value3,attribute_value4
+		from po_product	  
+		]]>
+	</sql>
+	
+	<sql id="whereAllColumns">
+			where 1=1
+		<if test="params.id !=null and params.id !=''">
+			and id = #{params.id}  
+		</if>		
+		<if test="params.name !=null and params.name !=''">
+			and name = #{params.name}  
+		</if>		
+		<if test="params.categoryId !=null and params.categoryId !=''">
+			and category_id = #{params.categoryId}  
+		</if>		
+		<if test="params.image !=null and params.image !=''">
+			and image = #{params.image}  
+		</if>		
+		<if test="params.introduction !=null and params.introduction !=''">
+			and introduction = #{params.introduction}  
+		</if>		
+		<if test="params.keywords !=null and params.keywords !=''">
+			and keywords = #{params.keywords}  
+		</if>		
+		<if test="params.weight !=null">
+			and weight = #{params.weight}
+		</if>					
+		<if test="params.isShow !=null and params.isShow !=''">
+			and is_show = #{params.isShow}  
+		</if>		
+		<if test="params.monthHits !=null">
+			and month_hits = #{params.monthHits}  
+		</if>				
+		<if test="params.monthHitsDate !=null">
+			and month_hits_date = #{params.monthHitsDate}  
+		</if>				
+		<if test="params.monthSales !=null">
+			and month_sales = #{params.monthSales}  
+		</if>				
+		<if test="params.monthSalesDate !=null">
+			and month_sales_date = #{params.monthSalesDate}  
+		</if>				
+		<if test="params.createUser !=null and params.createUser !=''">
+			and create_user = #{params.createUser}  
+		</if>		
+		<if test="params.createTime !=null">
+			and create_time = #{params.createTime}  
+		</if>				
+		<if test="params.modifyUser !=null and params.modifyUser !=''">
+			and modify_user = #{params.modifyUser}  
+		</if>		
+		<if test="params.modifyTime !=null">
+			and modify_time = #{params.modifyTime}  
+		</if>				
+		<if test="params.description !=null and params.description !=''">
+			and description = #{params.description}  
+		</if>		
+		<if test="params.attributeValue0 !=null and params.attributeValue0 !=''">
+			and attribute_value0 = #{params.attributeValue0}  
+		</if>		
+		<if test="params.attributeValue1 !=null and params.attributeValue1 !=''">
+			and attribute_value1 = #{params.attributeValue1}  
+		</if>		
+		<if test="params.attributeValue2 !=null and params.attributeValue2 !=''">
+			and attribute_value2 = #{params.attributeValue2}  
+		</if>		
+		<if test="params.attributeValue3 !=null and params.attributeValue3 !=''">
+			and attribute_value3 = #{params.attributeValue3}  
+		</if>		
+		<if test="params.attributeValue4 !=null and params.attributeValue4 !=''">
+			and attribute_value4 = #{params.attributeValue4}  
+		</if>		
+	</sql>
+	
+	
+	
+	
+	<select id="get" parameterType="Long" resultMap="ProductResult">
+	    <include refid="selectAllColumns" />
+		 where id = #{id}
+	</select>
+
+	<select id="getAll" resultMap="ProductResult">
+		<include refid="selectAllColumns" />
+	</select>
+	
+	<select id="getListByConditions"  resultMap="ProductResult">
+		<include refid="selectAllColumns" />
+		<include refid="whereAllColumns" />
+	</select>	
+	
+	<select id="getProductEntityListByConditions"  resultMap="ProductResult">
+		<include refid="selectAllColumns" />
+		<include refid="whereAllColumns" />
+		<![CDATA[	limit #{pager.startIndex},#{pager.pageSize}]]> 
+	</select>	
+	<select id="getProductEntityCountsByConditions"  resultType="Long">
+		<![CDATA[	select count(*) from po_product ]]> 
+		<include refid="whereAllColumns" />
+	</select>			
+	<update id="update" parameterType="_ProductEntity">
+		<![CDATA[
+		update po_product set  
+		id= #{id},name= #{name},category_id= #{categoryId},image= #{image},introduction= #{introduction},keywords= #{keywords},weight= #{weight},is_show= #{isShow},month_hits= #{monthHits},month_hits_date= #{monthHitsDate},month_sales= #{monthSales},month_sales_date= #{monthSalesDate},modify_user= #{modifyUser},modify_time= now(),description= #{description},attribute_value0= #{attributeValue0},attribute_value1= #{attributeValue1},attribute_value2= #{attributeValue2},attribute_value3= #{attributeValue3},attribute_value4= #{attributeValue4}
+		where id = #{id}
+		]]>
+	</update>
+	
+	<update id="updateNotNull" parameterType="_productEntity">
+        update po_product 
+    	<trim prefix="SET" suffixOverrides=",">
+				<if test="name != null">name= #{name},</if>
+				<if test="categoryId != null">category_id= #{categoryId},</if>
+				<if test="image != null">image= #{image},</if>
+				<if test="introduction != null">introduction= #{introduction},</if>
+				<if test="keywords != null">keywords= #{keywords},</if>
+				<if test="weight != null">weight= #{weight},</if>
+				<if test="isShow != null">is_show= #{isShow},</if>
+				<if test="monthHits != null">month_hits= #{monthHits},</if>
+				<if test="monthHitsDate != null">month_hits_date= #{monthHitsDate},</if>
+				<if test="monthSales != null">month_sales= #{monthSales},</if>
+				<if test="monthSalesDate != null">month_sales_date= #{monthSalesDate},</if>
+				<if test="createUser != null">create_user= #{createUser},</if>
+				<if test="createTime != null">create_time= #{createTime},</if>
+				<if test="modifyUser != null">modify_user= #{modifyUser},</if>
+				modify_time= now(),
+				<if test="description != null">description= #{description},</if>
+				<if test="attributeValue0 != null">attribute_value0= #{attributeValue0},</if>
+				<if test="attributeValue1 != null">attribute_value1= #{attributeValue1},</if>
+				<if test="attributeValue2 != null">attribute_value2= #{attributeValue2},</if>
+				<if test="attributeValue3 != null">attribute_value3= #{attributeValue3},</if>
+				<if test="attributeValue4 != null">attribute_value4= #{attributeValue4},</if>
+	    </trim>
+        where id = #{id}
+	</update>
+	
+	<!-- 自动生成主键 <insert id="insert" parameterType="_ProductEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id">-->
+	<insert id="insert" parameterType="_ProductEntity" >
+	<![CDATA[
+		insert into po_product(id,name,category_id,image,introduction,keywords,weight,is_show,month_hits,month_hits_date,month_sales,month_sales_date,create_user,create_time,modify_user,modify_time,description,attribute_value0,attribute_value1,attribute_value2,attribute_value3,attribute_value4)
+		values(#{id},#{name},#{categoryId},#{image},#{introduction},#{keywords},#{weight},#{isShow},#{monthHits},#{monthHitsDate},#{monthSales},#{monthSalesDate},#{createUser},now(),#{modifyUser},now(),#{description},#{attributeValue0},#{attributeValue1},#{attributeValue2},#{attributeValue3},#{attributeValue4})
+	]]>
+	</insert>
+	
+	 <!-- 根据主键删除一条记录 -->  
+    <delete id="delete" parameterType="Long">  
+    <![CDATA[
+        delete from po_product where id = #{id}
+    ]]>
+    </delete> 
+</mapper>

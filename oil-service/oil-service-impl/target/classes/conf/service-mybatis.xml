@@ -25,6 +25,12 @@
 	   	 <typeAlias type="com.oil.av.entity.platform.member.MemberBusinessEntity" alias="_MemberBusinessEntity"/>
 	   	 <typeAlias type="com.oil.av.entity.platform.config.SmsQueueEntity" alias="_SmsQueueEntity"/>
 	   	 <typeAlias type="com.oil.av.entity.platform.config.SmsTemplateEntity" alias="_SmsTemplateEntity"/>
+		 <typeAlias type="com.oil.av.entity.platform.config.ProductParameterValueEntity" alias="_ProductParameterValueEntity"/>
+		 <typeAlias type="com.oil.av.entity.platform.config.ProductParameterEntity" alias="_ProductParameterEntity"/>
+		 <typeAlias type="com.oil.av.entity.platform.config.ProductEntity" alias="_ProductEntity"/>
+		 <typeAlias type="com.oil.av.entity.platform.config.ProductCategoryEntity" alias="_ProductCategoryEntity"/>
+		 
+		 
 	</typeAliases>
 	<typeHandlers>
 		<!-- 

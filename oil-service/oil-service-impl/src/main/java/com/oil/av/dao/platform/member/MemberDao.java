@@ -93,5 +93,11 @@ public interface MemberDao {
 	 */
 	int getMemberCountByPhone(String phone);
 
-    
+
+	/**
+	 * 按需查询
+	 * @param mapSms
+	 * @return
+	 */
+	List<MemberEntity> getListByConditions(@Param("params") Map<String, Object> mapSms);
 }

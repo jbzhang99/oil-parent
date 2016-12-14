@@ -56,13 +56,14 @@ public class SignController extends BaseController {
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	@ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public JsonResult login(@Valid MemberSignRequest memberSignRequest,BindingResult br ){
+    public JsonResult login(@Valid MemberSignRequest memberSignRequest,BindingResult br ,
+    		HttpServletRequest request){
     	JsonResult jsonResult = new JsonResult();
     	if(br.hasErrors()){
 			this.illParamsResult(jsonResult, br);
     		return jsonResult;
 		}
-    	
+    	memberSignRequest.setIp(getIpAddr(request));
     	try{
 			MemberSignResponse usr = singService.loginByMobile(memberSignRequest);
 			jsonResult.setDataObject(usr);
@@ -112,13 +113,15 @@ public class SignController extends BaseController {
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public JsonResult getAttentionList(RegisterRequest register, BindingResult br) throws BusinessException {
+    public JsonResult getAttentionList(RegisterRequest register, BindingResult br,
+    		HttpServletRequest request) throws BusinessException {
     	JsonResult jsonResult = new JsonResult();
     	if(br.hasErrors()){
 			this.illParamsResult(jsonResult, br);
     		return jsonResult;
 		}
     	try {
+    		register.setIp(getIpAddr(request));
     		//注册成功默认登陆
     		MemberSignResponse sur = singService.registerMember(register);
     		jsonResult.setDataObject(sur);
@@ -320,4 +323,34 @@ public class SignController extends BaseController {
     	return null;
     }
 
+
+    /**
+     * 获取客户端真实IP
+     * 
+     * @param request
+     * @return
+     */
+    private String getIpAddr(HttpServletRequest request) {
+        String ip = request.getHeader("x-forwarded-for");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("http_client_ip");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+        }
+        // 如果是多级代理
+        if (ip != null && ip.indexOf(",") != -1) {
+            ip = ip.substring(ip.lastIndexOf(",") + 1, ip.length()).trim();
+        }
+        return ip;
+    }
 }

@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.oil.av.entity.platform.member.MemberBusinessEntity;
-import com.oil.av.vo.platform.member.MemberBusinessVo;
 import com.oil.framework.common.page.Pagination;
 
 
@@ -73,5 +72,5 @@ public interface MemberBusinessDao {
  	 * @param mapSms
  	 * @return
  	 */
-	List<MemberBusinessEntity> getListByConditions(Map<String, Object> mapSms);
+	List<MemberBusinessEntity> getListByConditions(@Param("params") Map<String, Object> mapSms);
 }

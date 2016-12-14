@@ -9,16 +9,6 @@ import java.util.Map;
 import com.oil.framework.common.page.Pagination;
 
 
-/**BaseVo
- * @Version: 1.0
- * @ProjectName:aikxian-framework-service
- * @Filename:  BaseVo.java
- * @PackageName: com.aikxian.framework.pub.vo
- * @Author: songchunlong 宋春龙
- * @Email: songchunlong@aikxian.com
- * @Date:2016年4月18日下午12:14:36
- * @Copyright (c) 2016, dev@aikxian.com.com All Rights Reserved.
- */
 public abstract class BaseVo implements Serializable {
 
     /**

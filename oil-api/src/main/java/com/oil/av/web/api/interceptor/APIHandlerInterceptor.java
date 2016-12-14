@@ -48,8 +48,6 @@ public class APIHandlerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse res, 
     		Object arg2) throws Exception {
-    	String reqIp = getIpAddr(req);
-    	
     	String memberId = req.getParameter("memberId");
  	   	String token = req.getParameter("token");
  	   	String version = req.getParameter("version");
@@ -57,10 +55,9 @@ public class APIHandlerInterceptor implements HandlerInterceptor {
  	   	String device = req.getParameter("device");
  	   	String serial = req.getParameter("serial");
  	   	
- 	    req.getParameterMap().put("ip", new String[]{reqIp});
  	   	if(StringUtils.isNotBlank(memberId)){
  		   //验证用户token
- 	   		String userToken = TokenUtilsService.createToken(memberId, version, reqIp, deviceCode, device);
+ 	   		String userToken = TokenUtilsService.createToken(memberId, version, deviceCode, device);
  	   		if(tokenUtilsService.checkToken(token, userToken, serial, memberId)){
  	   			return true;
  	   		}else{
@@ -72,36 +69,6 @@ public class APIHandlerInterceptor implements HandlerInterceptor {
            res.setStatus(400);
            return false;
  	   	}
-    }
-
-    /**
-     * 获取客户端真实IP
-     * 
-     * @param request
-     * @return
-     */
-    private String getIpAddr(HttpServletRequest request) {
-        String ip = request.getHeader("x-forwarded-for");
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getRemoteAddr();
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("http_client_ip");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-        }
-        // 如果是多级代理
-        if (ip != null && ip.indexOf(",") != -1) {
-            ip = ip.substring(ip.lastIndexOf(",") + 1, ip.length()).trim();
-        }
-        return ip;
     }
 
 }

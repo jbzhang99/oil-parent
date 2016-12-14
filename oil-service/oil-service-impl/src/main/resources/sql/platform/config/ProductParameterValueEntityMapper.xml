@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oil.av.dao.platform.config.ProductParameterValueDao">
+	<resultMap id="ProductParameterValueResult" type="_ProductParameterValueEntity">
+			<result property="productId" column="product_id" />	
+			<result property="parameterId" column="parameter_id" />	
+			<result property="parameterValue" column="parameter_value" />	
+			<result property="createUser" column="create_user" />	
+			<result property="createTime" column="create_time" />	
+			<result property="modifyUser" column="modify_user" />	
+			<result property="modifyTime" column="modify_time" />	
+	</resultMap>
+	<sql id="selectAllColumns">
+		<![CDATA[	
+		select
+		product_id,parameter_id,parameter_value,create_user,create_time,modify_user,modify_time
+		from po_product_parameter_value	  
+		]]>
+	</sql>
+	
+	<sql id="whereAllColumns">
+			where 1=1
+		<if test="params.productId !=null and params.productId !=''">
+			and product_id = #{params.productId}  
+		</if>		
+		<if test="params.parameterId !=null and params.parameterId !=''">
+			and parameter_id = #{params.parameterId}  
+		</if>		
+		<if test="params.parameterValue !=null and params.parameterValue !=''">
+			and parameter_value = #{params.parameterValue}  
+		</if>		
+		<if test="params.createUser !=null and params.createUser !=''">
+			and create_user = #{params.createUser}  
+		</if>		
+		<if test="params.createTime !=null">
+			and create_time = #{params.createTime}  
+		</if>				
+		<if test="params.modifyUser !=null and params.modifyUser !=''">
+			and modify_user = #{params.modifyUser}  
+		</if>		
+		<if test="params.modifyTime !=null">
+			and modify_time = #{params.modifyTime}  
+		</if>				
+	</sql>
+	
+	
+	
+	
+	<select id="get" parameterType="Long" resultMap="ProductParameterValueResult">
+	    <include refid="selectAllColumns" />
+		 where product_id = #{id}
+	</select>
+
+	<select id="getAll" resultMap="ProductParameterValueResult">
+		<include refid="selectAllColumns" />
+	</select>
+	
+	<select id="getListByConditions"  resultMap="ProductParameterValueResult">
+		<include refid="selectAllColumns" />
+		<include refid="whereAllColumns" />
+	</select>	
+	
+	<select id="getProductParameterValueEntityListByConditions"  resultMap="ProductParameterValueResult">
+		<include refid="selectAllColumns" />
+		<include refid="whereAllColumns" />
+		<![CDATA[	limit #{pager.startIndex},#{pager.pageSize}]]> 
+	</select>	
+	<select id="getProductParameterValueEntityCountsByConditions"  resultType="Long">
+		<![CDATA[	select count(*) from po_product_parameter_value ]]> 
+		<include refid="whereAllColumns" />
+	</select>			
+	<update id="update" parameterType="_ProductParameterValueEntity">
+		<![CDATA[
+		update po_product_parameter_value set  
+		product_id= #{productId},parameter_id= #{parameterId},parameter_value= #{parameterValue},modify_user= #{modifyUser},modify_time= now()
+		where product_id = #{productId}
+		]]>
+	</update>
+	
+	<update id="updateNotNull" parameterType="_productParameterValueEntity">
+        update po_product_parameter_value 
+    	<trim prefix="SET" suffixOverrides=",">
+				<if test="parameterId != null">parameter_id= #{parameterId},</if>
+				<if test="parameterValue != null">parameter_value= #{parameterValue},</if>
+				<if test="createUser != null">create_user= #{createUser},</if>
+				<if test="createTime != null">create_time= #{createTime},</if>
+				<if test="modifyUser != null">modify_user= #{modifyUser},</if>
+				modify_time= now()
+	    </trim>
+        where product_id = #{productId}
+	</update>
+	
+	<!-- 自动生成主键 <insert id="insert" parameterType="_ProductParameterValueEntity" useGeneratedKeys="true" keyProperty="productId" keyColumn="product_id">-->
+	<insert id="insert" parameterType="_ProductParameterValueEntity" >
+	<![CDATA[
+		insert into po_product_parameter_value(product_id,parameter_id,parameter_value,create_user,create_time,modify_user,modify_time)
+		values(#{productId},#{parameterId},#{parameterValue},#{createUser},now(),#{modifyUser},now())
+	]]>
+	</insert>
+	
+	 <!-- 根据主键删除一条记录 -->  
+    <delete id="delete" parameterType="Long">  
+    <![CDATA[
+        delete from po_product_parameter_value where product_id = #{productId}
+    ]]>
+    </delete> 
+</mapper>

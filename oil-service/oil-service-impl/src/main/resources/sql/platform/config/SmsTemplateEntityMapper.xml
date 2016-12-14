@@ -48,7 +48,7 @@
 	</sql>
 	
 <!-- start -->	
-	<select id="getListByConditions"  resultMap="SmTemplateResult">
+	<select id="getListByConditions"  resultMap="SmsTemplateResult">
 		<include refid="selectAllColumns" />
 		<include refid="whereAllColumns" />
 	</select>	

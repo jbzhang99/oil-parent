@@ -27,16 +27,13 @@ public class BaseRequest implements Serializable{
 	private String deviceCode;
 	
 	/**
-	 * 请求ip
-	 */
-	private String ip;
-	
-	/**
 	 * 设备 ios/android
 	 */
 	@NotBlank
 	@Pattern(regexp = "android|ios|ANDROID|IOS",message = "设备参数有误")
 	private String device;
+	
+	private String ip;
 	
 	public String getTooken() {
 		return tooken;
@@ -62,17 +59,21 @@ public class BaseRequest implements Serializable{
 	public void setDevice(String device) {
 		this.device = device;
 	}
-	/**
-	 * @return the ip
+	/**  
+	 * 获取ip  
+	 * @return ip ip  
 	 */
 	public String getIp() {
 		return ip;
 	}
-	/**
-	 * @param ip the ip to set
+	
+	/**  
+	 * 设置ip  
+	 * @param ip ip  
 	 */
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
+	
 
 }

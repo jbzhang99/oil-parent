@@ -2,18 +2,6 @@ package com.oil.framework.common.page;
 
 import java.io.Serializable;
 
-/**
- * 分页数据封装类
- * 
- * @Version: 1.0
- * @ProjectName:aikxian-framework-common
- * @Filename: SimplePage.java
- * @PackageName: com.aikxian.framework.common.page
- * @Author: songchunlong 宋春龙
- * @Email: songchunlong@aikxian.com
- * @Date:2016年4月18日下午12:18:17
- * @Copyright (c) 2016, dev@aikxian.com.com All Rights Reserved.
- */
 public class SimplePage extends DataTablePage implements Serializable {
 
   /**

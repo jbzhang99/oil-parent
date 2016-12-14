@@ -65,7 +65,7 @@ public interface SmsQueueDao {
 	 * @param mapSms
 	 * @return
 	 */
-	List<SmsQueueEntity> getListByConditions(Map<String, Object> mapSms);
+	List<SmsQueueEntity> getListByConditions(@Param("params") Map<String, Object> mapSms);
 
 	/**
 	 * 更新不为null的字段

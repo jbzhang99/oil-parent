@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oil.av.dao.platform.config.ProductCategoryDao">
+	<resultMap id="ProductCategoryResult" type="_ProductCategoryEntity">
+			<result property="id" column="id" />	
+			<result property="parentId" column="parent_id" />	
+			<result property="name" column="name" />	
+			<result property="image" column="image" />	
+			<result property="isShow" column="is_show" />	
+			<result property="createUser" column="create_user" />	
+			<result property="createTime" column="create_time" />	
+			<result property="modifyUser" column="modify_user" />	
+			<result property="modifyTime" column="modify_time" />	
+			<result property="description" column="description" />	
+			<result property="delFlag" column="del_flag" />	
+	</resultMap>
+	<sql id="selectAllColumns">
+		<![CDATA[	
+		select
+		id,parent_id,name,image,is_show,create_user,create_time,modify_user,modify_time,description,del_flag
+		from po_product_category	  
+		]]>
+	</sql>
+	
+	<sql id="whereAllColumns">
+			where 1=1
+		<if test="params.id !=null and params.id !=''">
+			and id = #{params.id}  
+		</if>		
+		<if test="params.parentId !=null and params.parentId !=''">
+			and parent_id = #{params.parentId}  
+		</if>		
+		<if test="params.name !=null and params.name !=''">
+			and name = #{params.name}  
+		</if>		
+		<if test="params.image !=null and params.image !=''">
+			and image = #{params.image}  
+		</if>		
+		<if test="params.isShow !=null and params.isShow !=''">
+			and is_show = #{params.isShow}  
+		</if>		
+		<if test="params.createUser !=null and params.createUser !=''">
+			and create_user = #{params.createUser}  
+		</if>		
+		<if test="params.createTime !=null">
+			and create_time = #{params.createTime}  
+		</if>				
+		<if test="params.modifyUser !=null and params.modifyUser !=''">
+			and modify_user = #{params.modifyUser}  
+		</if>		
+		<if test="params.modifyTime !=null">
+			and modify_time = #{params.modifyTime}  
+		</if>				
+		<if test="params.description !=null and params.description !=''">
+			and description = #{params.description}  
+		</if>		
+		<if test="params.delFlag !=null and params.delFlag !=''">
+			and del_flag = #{params.delFlag}  
+		</if>		
+	</sql>
+	
+	
+	
+	
+	<select id="get" parameterType="Long" resultMap="ProductCategoryResult">
+	    <include refid="selectAllColumns" />
+		 where id = #{id}
+	</select>
+
+	<select id="getAll" resultMap="ProductCategoryResult">
+		<include refid="selectAllColumns" />
+	</select>
+	
+	<select id="getListByConditions"  resultMap="ProductCategoryResult">
+		<include refid="selectAllColumns" />
+		<include refid="whereAllColumns" />
+	</select>	
+	
+	<select id="getProductCategoryEntityListByConditions"  resultMap="ProductCategoryResult">
+		<include refid="selectAllColumns" />
+		<include refid="whereAllColumns" />
+		<![CDATA[	limit #{pager.startIndex},#{pager.pageSize}]]> 
+	</select>	
+	<select id="getProductCategoryEntityCountsByConditions"  resultType="Long">
+		<![CDATA[	select count(*) from po_product_category ]]> 
+		<include refid="whereAllColumns" />
+	</select>			
+	<update id="update" parameterType="_ProductCategoryEntity">
+		<![CDATA[
+		update po_product_category set  
+		id= #{id},parent_id= #{parentId},name= #{name},image= #{image},is_show= #{isShow},modify_user= #{modifyUser},modify_time= now(),description= #{description},del_flag= #{delFlag}
+		where id = #{id}
+		]]>
+	</update>
+	
+	<update id="updateNotNull" parameterType="_productCategoryEntity">
+        update po_product_category 
+    	<trim prefix="SET" suffixOverrides=",">
+				<if test="parentId != null">parent_id= #{parentId},</if>
+				<if test="name != null">name= #{name},</if>
+				<if test="image != null">image= #{image},</if>
+				<if test="isShow != null">is_show= #{isShow},</if>
+				<if test="createUser != null">create_user= #{createUser},</if>
+				<if test="createTime != null">create_time= #{createTime},</if>
+				<if test="modifyUser != null">modify_user= #{modifyUser},</if>
+				modify_time= now(),
+				<if test="description != null">description= #{description},</if>
+				<if test="delFlag != null">del_flag= #{delFlag},</if>
+	    </trim>
+        where id = #{id}
+	</update>
+	
+	<!-- 自动生成主键 <insert id="insert" parameterType="_ProductCategoryEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id">-->
+	<insert id="insert" parameterType="_ProductCategoryEntity" >
+	<![CDATA[
+		insert into po_product_category(id,parent_id,name,image,is_show,create_user,create_time,modify_user,modify_time,description,del_flag)
+		values(#{id},#{parentId},#{name},#{image},#{isShow},#{createUser},now(),#{modifyUser},now(),#{description},#{delFlag})
+	]]>
+	</insert>
+	
+	 <!-- 根据主键删除一条记录 -->  
+    <delete id="delete" parameterType="Long">  
+    <![CDATA[
+        delete from po_product_category where id = #{id}
+    ]]>
+    </delete> 
+</mapper>

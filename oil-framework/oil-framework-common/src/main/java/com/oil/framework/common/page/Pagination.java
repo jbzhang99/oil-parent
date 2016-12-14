@@ -3,16 +3,6 @@ package com.oil.framework.common.page;
 import java.io.Serializable;
 import java.util.List;
 
-/**分页工具类
- * @Version: 1.0
- * @ProjectName:aikxian-framework-common
- * @Filename:  Pagination.java
- * @PackageName: com.aikxian.framework.common.page
- * @Author: songchunlong 宋春龙
- * @Email: songchunlong@aikxian.com
- * @Date:2016年4月18日下午12:17:24
- * @Copyright (c) 2016, dev@aikxian.com.com All Rights Reserved.
- */
 public class Pagination<T> extends SimplePage implements Serializable {
 				private static final long serialVersionUID = 1L;
 				/**

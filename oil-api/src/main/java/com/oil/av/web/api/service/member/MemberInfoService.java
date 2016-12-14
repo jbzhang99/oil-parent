@@ -123,6 +123,7 @@ public class MemberInfoService {
 			memberBusinessVo.setId(mbr.getId());
 			result = memberBusinessService.addMemberBusinessVo(memberBusinessVo);
 		}
+		
 		if(result !=1 ){
 			//数据库更新失败
 			throw new BusinessException("11111111");

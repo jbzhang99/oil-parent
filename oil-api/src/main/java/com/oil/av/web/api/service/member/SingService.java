@@ -108,7 +108,7 @@ public class SingService {
 		MemberSignResponse msr = new MemberSignResponse();
 		msr.setMemberId(member.getId());
 		msr.setToken(TokenUtilsService.createToken(member.getId(), memberSignRequest.getVersion(), 
-				memberSignRequest.getIp(), memberSignRequest.getDeviceCode(), memberSignRequest.getDevice()));
+				memberSignRequest.getDeviceCode(), memberSignRequest.getDevice()));
         //调用登录方法 
     	return msr;
     }
@@ -127,7 +127,7 @@ public class SingService {
 		MemberSignResponse usr = new MemberSignResponse();
 		usr.setMemberId(autoSignRequest.getMemberId());
 		String token = TokenUtilsService.createToken(autoSignRequest.getMemberId(), autoSignRequest.getVersion(),
-				autoSignRequest.getIp(), autoSignRequest.getDeviceCode(), autoSignRequest.getDevice());
+					autoSignRequest.getDeviceCode(), autoSignRequest.getDevice());
 		usr.setToken(token);
 		return usr;
 	}
@@ -187,7 +187,7 @@ public class SingService {
         		msr.setMemberId(memberVo.getId());
         		//TODO 缓存存放
         		msr.setToken(TokenUtilsService.createToken(memberVo.getId(), register.getVersion(), 
-        				register.getIp(), register.getDeviceCode(), register.getDevice()));
+        				register.getDeviceCode(), register.getDevice()));
         		msr.setSerial(serial);
         	}
 		} catch (Exception e) {
@@ -382,7 +382,7 @@ public class SingService {
     	msr.setSerial(serial);
     	//TODO 缓存存放
 		msr.setToken(TokenUtilsService.createToken(updateVo.getId(), pmr.getVersion(), 
-				pmr.getIp(), pmr.getDeviceCode(), pmr.getDevice()));
+				pmr.getDeviceCode(), pmr.getDevice()));
     	return msr;
     }
 

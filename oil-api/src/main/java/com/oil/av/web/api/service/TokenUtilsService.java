@@ -21,12 +21,10 @@ public class TokenUtilsService {
     //@Resource
     //private ErrorMsgService errorMsgServiceImpl;        //日志记录
 
-    public static String createToken(String memberId,String version,String ip,
-    		String deviceCode,String device){
+    public static String createToken(String memberId,String version, String deviceCode,String device){
     	SortedMap<Object,Object> map = new TreeMap<Object, Object>();
     	map.put("memberId", memberId);
     	map.put("version", version);
-    	map.put("ip", ip);
     	map.put("deviceCode", deviceCode);
     	map.put("device", device);
     	

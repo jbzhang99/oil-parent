@@ -3,23 +3,6 @@ package com.oil.av.vo.platform.config;
 import java.io.Serializable;
 
 import com.oil.framework.base.vo.BaseVo;
-/**
- * 运营管理-企业管理表
- * <p>Table: <strong>po_config_company_t</strong>
- * <p><table class="er-mapping" cellspacing=0 cellpadding=0 style="border:solid 1 #666;padding:3px;">
- *   <tr style="background-color:#ddd;Text-align:Left;">
- *     <th nowrap>属性名</th><th nowrap>属性类型</th><th nowrap>字段名</th><th nowrap>字段类型</th><th nowrap>说明</th>
- *   </tr>
- *   <tr><td>id</td><td>{@link java.lang.String}</td><td>id</td><td>varchar</td><td>主键id</td></tr>
- *   <tr><td>name</td><td>{@link java.lang.String}</td><td>name</td><td>varchar</td><td>公司名称</td></tr>
- *   <tr><td>address</td><td>{@link java.lang.String}</td><td>address</td><td>varchar</td><td>公司地址</td></tr>
- *   <tr><td>isEnable</td><td>{@link java.lang.Boolean}</td><td>is_enable</td><td>tinyint</td><td>是否启用</td></tr>
- *   <tr><td>createTime</td><td>{@link java.util.Date}</td><td>create_time</td><td>datetime</td><td>创建时间</td></tr>
- *   <tr><td>createUser</td><td>{@link java.lang.String}</td><td>create_user</td><td>varchar</td><td>创建人</td></tr>
- *   <tr><td>modifyTime</td><td>{@link java.util.Date}</td><td>modify_time</td><td>datetime</td><td>修改时间</td></tr>
- *   <tr><td>modifyUser</td><td>{@link java.lang.String}</td><td>modify_user</td><td>varchar</td><td>修改人</td></tr>
- * </table>
- */
 public class ConfigCompanyVo extends BaseVo{
  
  	

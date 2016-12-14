@@ -7,16 +7,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-/**Utils - Spring
- * @Version: 1.0
- * @ProjectName:aikxian-framework-common
- * @Filename:  SpringUtils.java
- * @PackageName: com.aikxian.framework.common.uitl
- * @Author: songchunlong 宋春龙
- * @Email: songchunlong@aikxian.com
- * @Date:2016年4月18日下午12:10:59
- * @Copyright (c) 2016, dev@aikxian.com.com All Rights Reserved.
- */
 @Component("springUtils")
 @Lazy(false)
 public final class SpringUtils implements ApplicationContextAware, DisposableBean {

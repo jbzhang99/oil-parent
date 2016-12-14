@@ -94,8 +94,8 @@ CREATE TABLE `po_business_notice` (
 
 DROP TABLE IF EXISTS `po_product_category`;
 CREATE TABLE `po_product_category` (
-  `id` varchar(64) NOT NULL COMMENT '编号',
-  `parent_id` varchar(64) NOT NULL COMMENT '父级编号',
+  `id` varchar(32) NOT NULL COMMENT '编号',
+  `parent_id` varchar(32) NOT NULL COMMENT '父级编号',
   `name` varchar(64) NOT NULL COMMENT '分类名称',
   `image` varchar(255) DEFAULT NULL COMMENT '图标',
   `is_show` char(1) DEFAULT '1' COMMENT '是否显示',
@@ -110,8 +110,8 @@ CREATE TABLE `po_product_category` (
 
 DROP TABLE IF EXISTS `po_product`;
 CREATE TABLE `po_product` (
-  `id` varchar(64) NOT NULL COMMENT '编号',
-  `name` varchar(64) NOT NULL COMMENT '商品名称',
+  `id` varchar(32) NOT NULL COMMENT '编号',
+  `name` varchar(32) NOT NULL COMMENT '商品名称',
   `category_id` varchar(64) NOT NULL COMMENT '分类id',
   `image` varchar(255) DEFAULT NULL COMMENT '缩略图',
   `introduction` longtext DEFAULT NULL COMMENT '商品简介',
@@ -139,8 +139,8 @@ CREATE TABLE `po_product` (
 
 DROP TABLE IF EXISTS `po_product_parameter`;
 CREATE TABLE `po_product_parameter` (
-  `id` varchar(64) NOT NULL COMMENT '编号',
-  `name` varchar(64) NOT NULL COMMENT '参数名称',
+  `id` varchar(32) NOT NULL COMMENT '编号',
+  `name` varchar(32) NOT NULL COMMENT '参数名称',
   `param_type` varchar(255) DEFAULT NULL COMMENT '参数类型',
   `weight` int(11) DEFAULT '0' COMMENT '权重，越大越靠前',
   `create_user` varchar(50) NOT NULL COMMENT '创建人',
@@ -154,10 +154,14 @@ CREATE TABLE `po_product_parameter` (
 
 DROP TABLE IF EXISTS `po_product_parameter_value`;
 CREATE TABLE `po_product_parameter_value` (
-  `id` varchar(64) NOT NULL COMMENT '商品编号',
-  `parameter_id` varchar(64) NOT NULL COMMENT '参数id',
-  `parameter_value` varchar(255) DEFAULT NULL COMMENT '参数类型',
-  PRIMARY KEY (`id`)
+  `product_id` varchar(32) NOT NULL COMMENT '商品ID',
+  `parameter_id` varchar(32) NOT NULL COMMENT '参数ID',
+  `parameter_value` varchar(255) DEFAULT NULL COMMENT '参数值',
+  `create_user` varchar(50) NOT NULL COMMENT '创建人',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `modify_user` varchar(50) NOT NULL COMMENT '修改人',
+  `modify_time` datetime NOT NULL COMMENT '修改时间',
+  PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='运营管理-商品参数值';
 
 
