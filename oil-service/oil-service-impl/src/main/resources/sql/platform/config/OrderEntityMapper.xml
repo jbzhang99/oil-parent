@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oil.av.dao.platform.config.OrderDao">
+	<resultMap id="OrderResult" type="_OrderEntity">
+			<result property="id" column="id" />	
+			<result property="orderSn" column="order_sn" />	
+			<result property="memberId" column="member_id" />	
+			<result property="productId" column="product_id" />	
+			<result property="orderType" column="order_type" />	
+			<result property="orderStatus" column="order_status" />	
+			<result property="orderMemo" column="order_memo" />	
+			<result property="businessName" column="business_name" />	
+			<result property="touchName" column="touch_name" />	
+			<result property="touchPhone" column="touch_phone" />	
+			<result property="orderGoods" column="order_goods" />	
+			<result property="bank" column="bank" />	
+			<result property="bankNumber" column="bank_number" />	
+			<result property="invoice" column="invoice" />	
+			<result property="createUser" column="create_user" />	
+			<result property="createTime" column="create_time" />	
+			<result property="modifyUser" column="modify_user" />	
+			<result property="modifyTime" column="modify_time" />	
+			<result property="description" column="description" />	
+	</resultMap>
+	<sql id="selectAllColumns">
+		<![CDATA[	
+		select
+		id,order_sn,member_id,product_id,order_type,order_status,order_memo,business_name,touch_name,touch_phone,order_goods,bank,bank_number,invoice,create_user,create_time,modify_user,modify_time,description
+		from po_order	  
+		]]>
+	</sql>
+	
+	<sql id="whereAllColumns">
+			where 1=1
+		<if test="params.id !=null and params.id !=''">
+			and id = #{params.id}  
+		</if>		
+		<if test="params.orderSn !=null and params.orderSn !=''">
+			and order_sn = #{params.orderSn}  
+		</if>		
+		<if test="params.memberId !=null and params.memberId !=''">
+			and member_id = #{params.memberId}  
+		</if>		
+		<if test="params.productId !=null and params.productId !=''">
+			and product_id = #{params.productId}  
+		</if>		
+		<if test="params.orderType !=null and params.orderType !=''">
+			and order_type = #{params.orderType}  
+		</if>		
+		<if test="params.orderStatus !=null and params.orderStatus !=''">
+			and order_status = #{params.orderStatus}  
+		</if>		
+		<if test="params.orderMemo !=null and params.orderMemo !=''">
+			and order_memo = #{params.orderMemo}  
+		</if>		
+		<if test="params.businessName !=null and params.businessName !=''">
+			and business_name = #{params.businessName}  
+		</if>		
+		<if test="params.touchName !=null and params.touchName !=''">
+			and touch_name = #{params.touchName}  
+		</if>		
+		<if test="params.touchPhone !=null and params.touchPhone !=''">
+			and touch_phone = #{params.touchPhone}  
+		</if>		
+		<if test="params.orderGoods !=null">
+			and order_goods = #{params.orderGoods}  
+		</if>				
+		<if test="params.bank !=null and params.bank !=''">
+			and bank = #{params.bank}  
+		</if>		
+		<if test="params.bankNumber !=null and params.bankNumber !=''">
+			and bank_number = #{params.bankNumber}  
+		</if>		
+		<if test="params.invoice !=null and params.invoice !=''">
+			and invoice = #{params.invoice}  
+		</if>		
+		<if test="params.createUser !=null and params.createUser !=''">
+			and create_user = #{params.createUser}  
+		</if>		
+		<if test="params.createTime !=null">
+			and create_time = #{params.createTime}  
+		</if>				
+		<if test="params.modifyUser !=null and params.modifyUser !=''">
+			and modify_user = #{params.modifyUser}  
+		</if>		
+		<if test="params.modifyTime !=null">
+			and modify_time = #{params.modifyTime}  
+		</if>				
+		<if test="params.description !=null and params.description !=''">
+			and description = #{params.description}  
+		</if>		
+	</sql>
+	
+	
+	
+	
+	<select id="get" parameterType="Long" resultMap="OrderResult">
+	    <include refid="selectAllColumns" />
+		 where id = #{id}
+	</select>
+
+	<select id="getAll" resultMap="OrderResult">
+		<include refid="selectAllColumns" />
+	</select>
+	
+	<select id="getListByConditions"  resultMap="OrderResult">
+		<include refid="selectAllColumns" />
+		<include refid="whereAllColumns" />
+	</select>	
+	
+	<select id="getOrderEntityListByConditions"  resultMap="OrderResult">
+		<include refid="selectAllColumns" />
+		<include refid="whereAllColumns" />
+		<![CDATA[	limit #{pager.startIndex},#{pager.pageSize}]]> 
+	</select>	
+	<select id="getOrderEntityCountsByConditions"  resultType="Long">
+		<![CDATA[	select count(*) from po_order ]]> 
+		<include refid="whereAllColumns" />
+	</select>			
+	<update id="update" parameterType="_OrderEntity">
+		<![CDATA[
+		update po_order set  
+		id= #{id},order_sn= #{orderSn},member_id= #{memberId},product_id= #{productId},order_type= #{orderType},order_status= #{orderStatus},order_memo= #{orderMemo},business_name= #{businessName},touch_name= #{touchName},touch_phone= #{touchPhone},order_goods= #{orderGoods},bank= #{bank},bank_number= #{bankNumber},invoice= #{invoice},modify_user= #{modifyUser},modify_time= now(),description= #{description}
+		where id = #{id}
+		]]>
+	</update>
+	
+	<update id="updateNotNull" parameterType="_orderEntity">
+        update po_order 
+    	<trim prefix="SET" suffixOverrides=",">
+				<if test="orderSn != null">order_sn= #{orderSn},</if>
+				<if test="memberId != null">member_id= #{memberId},</if>
+				<if test="productId != null">product_id= #{productId},</if>
+				<if test="orderType != null">order_type= #{orderType},</if>
+				<if test="orderStatus != null">order_status= #{orderStatus},</if>
+				<if test="orderMemo != null">order_memo= #{orderMemo},</if>
+				<if test="businessName != null">business_name= #{businessName},</if>
+				<if test="touchName != null">touch_name= #{touchName},</if>
+				<if test="touchPhone != null">touch_phone= #{touchPhone},</if>
+				<if test="orderGoods != null">order_goods= #{orderGoods},</if>
+				<if test="bank != null">bank= #{bank},</if>
+				<if test="bankNumber != null">bank_number= #{bankNumber},</if>
+				<if test="invoice != null">invoice= #{invoice},</if>
+				<if test="createUser != null">create_user= #{createUser},</if>
+				<if test="createTime != null">create_time= #{createTime},</if>
+				<if test="modifyUser != null">modify_user= #{modifyUser},</if>
+				modify_time= now(),
+				<if test="description != null">description= #{description},</if>
+	    </trim>
+        where id = #{id}
+	</update>
+	
+	<!-- 自动生成主键 <insert id="insert" parameterType="_OrderEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id">-->
+	<insert id="insert" parameterType="_OrderEntity" >
+	<![CDATA[
+		insert into po_order(id,order_sn,member_id,product_id,order_type,order_status,order_memo,business_name,touch_name,touch_phone,order_goods,bank,bank_number,invoice,create_user,create_time,modify_user,modify_time,description)
+		values(#{id},#{orderSn},#{memberId},#{productId},#{orderType},#{orderStatus},#{orderMemo},#{businessName},#{touchName},#{touchPhone},#{orderGoods},#{bank},#{bankNumber},#{invoice},#{createUser},now(),#{modifyUser},now(),#{description})
+	]]>
+	</insert>
+	
+	 <!-- 根据主键删除一条记录 -->  
+    <delete id="delete" parameterType="Long">  
+    <![CDATA[
+        delete from po_order where id = #{id}
+    ]]>
+    </delete> 
+</mapper>

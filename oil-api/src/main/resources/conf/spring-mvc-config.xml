@@ -77,8 +77,9 @@
 		<mvc:interceptor>
 			<!-- 拦截所有与用户相关的Controller  -->
 			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="/index" />
-			<mvc:exclude-mapping path="/sign" />
+			<mvc:exclude-mapping path="/index/*.do" />
+			<mvc:exclude-mapping path="/sign/*.do" />
+			<mvc:exclude-mapping path="/pro/*.do" />
 			<bean class="com.oil.av.web.api.interceptor.APIHandlerInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

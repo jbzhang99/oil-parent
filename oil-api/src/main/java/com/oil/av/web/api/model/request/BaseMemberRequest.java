@@ -18,7 +18,7 @@ public class BaseMemberRequest extends BaseRequest{
 	 * 用户ID
 	 */
 	@NotEmpty
-	@Pattern(regexp="^\\w{32}$", message="用户id不正确")
+	@Pattern(regexp="^\\w{32}$", message="用户ID格式不正确")
 	private String memberId;
 
 	/**  
